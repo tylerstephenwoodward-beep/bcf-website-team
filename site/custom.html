@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Custom Work · Marks Metal Signs</title>
+<meta name="description" content="A logo cut in steel, a sign for your property or a one-off piece. Tell us what you have in mind and get ideas and a price back.">
+<link rel="icon" href="/assets/img/mms-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261026k">
+<style>
+/* An open inquiry: the vision, any questions, and how to reach you. */
+/* One column until there's room for two; the example panel only stays pinned when it sits beside the form. */
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; align-items: start; padding-block: 24px 80px; }
+.layout .intro { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.layout .intro .stage3d { aspect-ratio: 16 / 9; }
+.layout form { min-width: 0; display: flex; flex-direction: column; gap: 26px; }
+@media (min-width: 1000px) { .layout { grid-template-columns: minmax(300px, 5fr) minmax(0, 7fr); } .layout .intro { position: sticky; top: 72px; } }
+.step { display: flex; flex-direction: column; gap: 10px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.step > legend, .step > .head { display: flex; align-items: baseline; gap: 10px; padding: 0; margin-bottom: 2px; font: 600 18px/1.3 var(--display); }
+.step .n { font: 500 12px/1 var(--mono); color: var(--spark); }
+.step .opt { font: 400 13px/1 var(--body); color: var(--ink-muted); }
+.idea { font-size: 16px; line-height: 1.55; min-height: 140px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 720px) { .grid-3 { grid-template-columns: 1fr; } }
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/","opentype":"https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.module.js"}}</script>
+</head>
+<body>
+<header data-nav></header>
+<main class="wrap">
+  <div class="page-head">
+    <p class="eyebrow">Custom work</p>
+    <h1>What's your concept?</h1>
+    <p class="lead">A sign for your property, a logo cut in steel or something one-of-a-kind. Describe it in your own words and we will come back with ideas and a price.</p>
+  </div>
+  <div class="layout">
+    <div class="intro">
+      <div class="stage3d" id="customStage" role="img" aria-label="3D model of a stainless panel with OAK HOLLOW cut through it"><span class="loading3d">Loading 3D view</span><span class="hint3d">Drag to turn · + and − to zoom</span></div>
+      <p class="help">Example custom panel. We can use names, logos, and shapes to create something custom.</p>
+    </div>
+
+    <form class="panel" id="customForm" novalidate>
+      <div class="step">
+        <label class="head" for="idea"><span class="n">01</span>Explain your design</label>
+        <textarea class="input idea" id="idea" rows="6" placeholder="The entrance to our apartment complex: the property name on the stone wall out front, and matching numbers on every building."></textarea>
+      </div>
+
+      <div class="step">
+        <label class="head" for="questions"><span class="n">02</span>Any questions? <span class="opt">optional</span></label>
+        <textarea class="input" id="questions" rows="3" placeholder="What other fonts do you offer? How long does it take?"></textarea>
+      </div>
+
+      <div class="step">
+        <div class="head"><span class="n">03</span>How to reach you</div>
+        <div class="grid-3">
+          <div class="field"><label class="label" for="name">Name</label><input class="input" id="name" autocomplete="name"></div>
+          <div class="field"><label class="label" for="email">Email</label><input class="input" id="email" type="email" autocomplete="email"></div>
+          <div class="field"><label class="label" for="phone">Phone <span style="text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></label><input class="input" id="phone" type="tel" autocomplete="tel"></div>
+        </div>
+      </div>
+
+      <p class="help" id="err" role="alert" style="color:var(--fail)"></p>
+      <button class="btn lg" type="submit" style="align-self:flex-start">Submit</button>
+      <p class="help">We only use this to reply about your sign. We never sell or share it. <a href="/privacy">Privacy</a></p>
+    </form>
+  </div>
+</main>
+<footer data-footer></footer>
+<script src="/assets/js/layout.js?v=20261026k"></script>
+<script src="/assets/js/quote.js?v=20261026k"></script>
+<script src="/assets/js/plate.js?v=20261026k"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var v = function (id) { return $(id).value.trim(); };
+  $('customForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!v('idea')) { $('err').textContent = 'Tell us a little about your design.'; return; }
+    if (!v('name') || !/^\S+@\S+\.\S+$/.test(v('email'))) { $('err').textContent = 'Add your name and a valid email so we can reply.'; return; }
+    $('err').textContent = '';
+    BCFQuote.submit({ type: 'Custom inquiry', idea: v('idea'), questions: v('questions'), name: v('name'), email: v('email'), phone: v('phone') },
+      e.target.querySelector('button[type=submit]'));
+  });
+})();
+</script>
+<script type="module">
+import { mount } from '/assets/js/viewer3d.js?v=20261026k';
+const stage = document.getElementById('customStage');
+new IntersectionObserver((e, io) => {
+  if (!e[0].isIntersecting) return;
+  io.disconnect();
+  mount(stage, { number: 'OAK HOLLOW', maxLen: 16, finish: 'brushed', kind: 'plate', font: 'jost', size: 6 });
+  stage.querySelector('.loading3d').remove();
+}, { rootMargin: '300px' }).observe(stage);
+</script>
+</body>
+</html>

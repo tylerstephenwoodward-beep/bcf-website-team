@@ -1,0 +1,211 @@
+{
+  "walls": [
+    {
+      "id": "vinyl_lap",
+      "label": "Vinyl lap siding",
+      "group": "siding",
+      "paintable": true,
+      "files": {
+        "white": "vinyl_lap-white.webp",
+        "cream": "vinyl_lap-cream.webp",
+        "light_gray": "vinyl_lap-light_gray.webp",
+        "greige": "vinyl_lap-greige.webp",
+        "sage": "vinyl_lap-sage.webp",
+        "slate_blue": "vinyl_lap-slate_blue.webp",
+        "iron_gray": "vinyl_lap-iron_gray.webp",
+        "navy": "vinyl_lap-navy.webp",
+        "barn_red": "vinyl_lap-barn_red.webp",
+        "black": "vinyl_lap-black.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "fiber_cement_lap",
+      "label": "Fiber cement lap siding",
+      "group": "siding",
+      "paintable": true,
+      "files": {
+        "white": "fiber_cement_lap-white.webp",
+        "cream": "fiber_cement_lap-cream.webp",
+        "light_gray": "fiber_cement_lap-light_gray.webp",
+        "greige": "fiber_cement_lap-greige.webp",
+        "sage": "fiber_cement_lap-sage.webp",
+        "slate_blue": "fiber_cement_lap-slate_blue.webp",
+        "iron_gray": "fiber_cement_lap-iron_gray.webp",
+        "navy": "fiber_cement_lap-navy.webp",
+        "barn_red": "fiber_cement_lap-barn_red.webp",
+        "black": "fiber_cement_lap-black.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "board_batten",
+      "label": "Board and batten",
+      "group": "siding",
+      "paintable": true,
+      "files": {
+        "white": "board_batten-white.webp",
+        "cream": "board_batten-cream.webp",
+        "light_gray": "board_batten-light_gray.webp",
+        "greige": "board_batten-greige.webp",
+        "sage": "board_batten-sage.webp",
+        "slate_blue": "board_batten-slate_blue.webp",
+        "iron_gray": "board_batten-iron_gray.webp",
+        "navy": "board_batten-navy.webp",
+        "barn_red": "board_batten-barn_red.webp",
+        "black": "board_batten-black.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "vertical_panel",
+      "label": "Vertical groove panel (T1-11)",
+      "group": "siding",
+      "paintable": true,
+      "files": {
+        "white": "vertical_panel-white.webp",
+        "cream": "vertical_panel-cream.webp",
+        "light_gray": "vertical_panel-light_gray.webp",
+        "greige": "vertical_panel-greige.webp",
+        "sage": "vertical_panel-sage.webp",
+        "slate_blue": "vertical_panel-slate_blue.webp",
+        "iron_gray": "vertical_panel-iron_gray.webp",
+        "navy": "vertical_panel-navy.webp",
+        "barn_red": "vertical_panel-barn_red.webp",
+        "black": "vertical_panel-black.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "cedar",
+      "label": "Natural cedar slats",
+      "group": "wood",
+      "paintable": false,
+      "files": {
+        "natural": "cedar.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "brick",
+      "label": "Red brick",
+      "group": "masonry",
+      "paintable": false,
+      "files": {
+        "natural": "brick.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "brick_buff",
+      "label": "Buff brick",
+      "group": "masonry",
+      "paintable": false,
+      "files": {
+        "natural": "brick_buff.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "brick_painted",
+      "label": "Painted brick",
+      "group": "masonry",
+      "paintable": true,
+      "files": {
+        "white": "brick_painted-white.webp",
+        "cream": "brick_painted-cream.webp",
+        "light_gray": "brick_painted-light_gray.webp",
+        "greige": "brick_painted-greige.webp",
+        "sage": "brick_painted-sage.webp",
+        "slate_blue": "brick_painted-slate_blue.webp",
+        "iron_gray": "brick_painted-iron_gray.webp",
+        "navy": "brick_painted-navy.webp",
+        "barn_red": "brick_painted-barn_red.webp",
+        "black": "brick_painted-black.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "stone",
+      "label": "Natural stone",
+      "group": "masonry",
+      "paintable": false,
+      "files": {
+        "natural": "stone.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "block_painted",
+      "label": "Painted block",
+      "group": "masonry",
+      "paintable": true,
+      "files": {
+        "white": "block_painted-white.webp",
+        "cream": "block_painted-cream.webp",
+        "light_gray": "block_painted-light_gray.webp",
+        "greige": "block_painted-greige.webp",
+        "sage": "block_painted-sage.webp",
+        "slate_blue": "block_painted-slate_blue.webp",
+        "iron_gray": "block_painted-iron_gray.webp",
+        "navy": "block_painted-navy.webp",
+        "barn_red": "block_painted-barn_red.webp",
+        "black": "block_painted-black.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    },
+    {
+      "id": "stucco",
+      "label": "Stucco",
+      "group": "masonry",
+      "paintable": true,
+      "files": {
+        "white": "stucco-white.webp",
+        "cream": "stucco-cream.webp",
+        "light_gray": "stucco-light_gray.webp",
+        "greige": "stucco-greige.webp",
+        "sage": "stucco-sage.webp",
+        "slate_blue": "stucco-slate_blue.webp",
+        "iron_gray": "stucco-iron_gray.webp",
+        "navy": "stucco-navy.webp",
+        "barn_red": "stucco-barn_red.webp",
+        "black": "stucco-black.webp"
+      },
+      "widthIn": 40,
+      "heightIn": 25,
+      "pxPerInch": 50.0
+    }
+  ],
+  "paintPresets": {
+    "white": "#f2f1ec",
+    "cream": "#ece3cf",
+    "light_gray": "#c9cac6",
+    "greige": "#b6ab98",
+    "sage": "#9aa58e",
+    "slate_blue": "#5f7486",
+    "iron_gray": "#5a5d5f",
+    "navy": "#2c3a4d",
+    "barn_red": "#7a2e26",
+    "black": "#1d1e20"
+  }
+}

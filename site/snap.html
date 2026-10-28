@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Send a Photo of Your Wall · Marks Metal Signs</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/img/mms-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261026k">
+<style>
+.snap { display: flex; flex-direction: column; gap: 16px; max-width: 480px; padding-block: 20px 40px; }
+.snap h1 { font-size: 28px; }
+.photo-art { display: block; width: 100%; height: auto; }
+.tips { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.tips li { position: relative; padding-left: 20px; color: var(--ink-muted); }
+.tips li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--spark); }
+.tips b { color: var(--ink); font-weight: 600; }
+.snap input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.snap .btn { width: 100%; }
+.shot { width: 100%; border-radius: 12px; }
+.shot[hidden], .snap [hidden] { display: none; }
+.state { font-weight: 500; text-align: center; }
+.state.ok { color: var(--ok); }
+.state.bad { color: var(--fail); }
+</style>
+</head>
+<body>
+<header data-nav></header>
+<main class="wrap snap">
+  <h1>Photograph the spot by your door</h1>
+  <div id="art"></div>
+  <ul class="tips">
+    <li><b>Step back</b> 6 to 10 feet</li>
+    <li><b>Fill the frame</b> with the wall where the sign goes</li>
+    <li><b>Face it straight on,</b> in daylight</li>
+  </ul>
+  <label class="btn lg" for="cam" id="camBtn">Open camera</label>
+  <input type="file" id="cam" accept="image/*" capture="environment">
+  <img class="shot" id="shot" alt="Your photo" hidden>
+  <p class="state" id="state" aria-live="polite"></p>
+  <p class="help">Your phone may ask to let this page use the camera. Tap Allow, or choose a photo you already have. The photo goes straight to the design page on your computer and is never stored or shared. <a href="/privacy">Privacy</a></p>
+</main>
+<script src="/assets/js/layout.js?v=20261026k"></script>
+<script type="module">
+// The phone half of the QR handoff (photo.js has the computer half): take a photo, shrink it, and send it
+// directly to the design page that showed the code.
+import { art, animateArt } from '/assets/js/photo-art.js?v=20261026k';
+const $ = (id) => document.getElementById(id);
+const say = (text, kind) => { $('state').textContent = text; $('state').className = 'state ' + (kind || ''); };
+$('art').innerHTML = art;
+animateArt($('art'));
+
+const key = new URLSearchParams(location.search).get('k');
+if (!key) {
+  $('camBtn').hidden = true;
+  say('Open this page by scanning the code on the design page.', 'bad');
+}
+
+// Shrink to 2000 px on the long side. Redrawing also drops the camera's location data.
+async function shrink(file) {
+  const img = await createImageBitmap(file);
+  const k = Math.min(1, 2000 / Math.max(img.width, img.height));
+  const c = document.createElement('canvas');
+  c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+  c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+  return new Promise((ok) => c.toBlob(ok, 'image/jpeg', 0.85));
+}
+
+const load = (src, integrity) => new Promise((ok, fail) => {
+  const s = document.createElement('script');
+  s.src = src; s.integrity = integrity; s.crossOrigin = 'anonymous'; s.onload = ok; s.onerror = fail;
+  document.head.appendChild(s);
+});
+
+let conn = null;
+function connect() {
+  if (conn) return Promise.resolve(conn);
+  return load('https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js', 'sha384-nlUQ8ZqCbvStErob+biJNzSgltf6urV3VGqhfIfzhmg9RXmpeRm76ELw0pYnKlTR').then(() => new Promise((ok, fail) => {
+    const peer = new window.Peer();
+    const timer = setTimeout(() => fail(new Error('timeout')), 15000);
+    peer.on('error', fail);
+    peer.on('open', () => {
+      const c = peer.connect(key, { reliable: true });
+      c.on('open', () => { clearTimeout(timer); conn = c; ok(c); });
+      c.on('data', (d) => {
+        if (d === 'ok') say('Sent. Look at your computer.', 'ok');
+        if (d === 'rejected') say('That photo couldn’t be used. Try taking another.', 'bad');
+      });
+      c.on('error', fail);
+      c.on('close', () => { conn = null; });
+    });
+  }));
+}
+
+$('cam').addEventListener('change', async (e) => {
+  const f = e.target.files && e.target.files[0];
+  if (!f) return;
+  e.target.value = '';
+  say('Sending…');
+  try {
+    const blob = await shrink(f);
+    $('shot').src = URL.createObjectURL(blob);
+    $('shot').hidden = false;
+    const c = await connect();
+    c.send({ type: 'image/jpeg', buf: await blob.arrayBuffer() });
+    $('camBtn').textContent = 'Take another';
+  } catch (err) {
+    say('Couldn’t reach your computer. Keep the design page open there and scan the code again.', 'bad');
+  }
+});
+</script>
+</body>
+</html>

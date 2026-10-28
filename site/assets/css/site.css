@@ -1,0 +1,119 @@
+/* Marks Metal Signs: tokens from the design system (forge black, bone, stainless, spark). */
+:root {
+  --forge: #141311;
+  --forge-2: #24221f;
+  --bone-50: #f3f0ea;
+  --bone-0: #fbfaf7;
+  --bone-100: #e8e4dc;
+  --hairline: #d3cec4;
+  --steel-400: #85847f;
+  --ink: #141311;
+  --ink-muted: #55524c;
+  --on-forge: #f3f0ea;
+  --spark: #b3470f;
+  --spark-hover: #8f380b;
+  --spark-on-forge: #ffd23f; /* yellow underlines and labels on the black bands (nav, footer, custom band) */
+  --spark-100: #f6e3d3;
+  /* Main buttons are yellow with black text; links are blue (Terran, 2026-10-25). */
+  --go: #ffd23f; --go-hover: #f2c200; --go-ink: #141311;
+  --link: #1f5fbf; --link-hover: #174a96; --link-on-forge: #8cbcff;
+  --ok: #1f5f7a; --ok-100: #e1eef3;
+  --warn: #7a5300; --warn-100: #f7edd6;
+  --fail: #a51d24; --fail-100: #f8e2e1;
+  --display: "Jost", "Futura PT", Futura, "Century Gothic", sans-serif;
+  --body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --gutter-l: max(20px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(20px, env(safe-area-inset-right, 0px));
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bone-50); color: var(--ink); font: 400 15px/1.6 var(--body); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--spark); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.05; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.eyebrow { font: 600 13px/16px var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+.band-forge { background: var(--forge); color: var(--on-forge); }
+.band-forge .eyebrow { color: var(--spark-on-forge); }
+
+/* Nav */
+.nav { position: sticky; top: 0; z-index: 20; background: var(--forge); color: var(--on-forge); }
+.nav .wrap { display: flex; align-items: center; gap: 24px; padding-block: 6px; }
+/* Text wordmark until Terran's Marks Metal Signs logo arrives. */
+.wordmark { display: inline-flex; flex-direction: column; align-items: flex-start; font-family: var(--display); line-height: 1; color: inherit; }
+.wordmark b { font-weight: 700; font-size: 22px; letter-spacing: 0.16em; }
+.wordmark span { margin-top: 4px; font-weight: 500; font-size: 10px; letter-spacing: 0.36em; }
+.wordmark.lg b { font-size: 30px; }
+.wordmark.lg span { font-size: 13px; letter-spacing: 0.37em; }
+.nav .home { text-decoration: none; padding-block: 10px; }
+.nav ul { display: flex; gap: 22px; margin: 0 0 0 auto; padding: 0; list-style: none; font: 500 14px/20px var(--body); }
+.nav ul a { text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav ul a:hover, .nav ul a[aria-current="page"] { border-bottom-color: var(--spark-on-forge); }
+.nav .menu { display: none; margin-left: auto; background: none; border: 0; color: inherit; padding: 8px; cursor: pointer; }
+@media (max-width: 880px) {
+  .nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--forge); padding: 8px var(--gutter-r) 16px var(--gutter-l); }
+  .nav ul.open { display: flex; }
+  .nav ul a { display: block; padding: 12px 0; }
+  .nav .menu { display: inline-flex; }
+  .nav .btn { display: none; }
+}
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; border-radius: 4px; border: 1.5px solid transparent;
+  background: var(--go); color: var(--go-ink); border-color: var(--go-ink); font: 600 14px/20px var(--body); text-decoration: none; cursor: pointer; transition: background-color 150ms; }
+.btn:hover { background: var(--go-hover); }
+.link, .help a { color: var(--link); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.link:hover, .help a:hover { color: var(--link-hover); }
+.band-forge .link { color: var(--link-on-forge); }
+.btn.lg { padding: 13px 22px; font-size: 16px; }
+.btn.ghost { background: transparent; color: inherit; border-color: currentColor; }
+.btn.ghost:hover { background: rgba(127,127,127,0.12); }
+
+/* Page headers */
+.page-head { padding-block: 36px 4px; }
+.page-head h1 { font-size: clamp(28px, 3.6vw, 40px); }
+.page-head p.lead { margin-top: 10px; max-width: 640px; font-size: 16px; line-height: 1.6; color: var(--ink-muted); }
+
+/* Cards and panels */
+.panel { background: var(--bone-0); border: 1px solid var(--hairline); border-radius: 10px; padding: 24px; min-width: 0; }
+.label { display: block; margin-bottom: 8px; font: 600 13px/16px var(--body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+.help { font-size: 14px; line-height: 20px; color: var(--ink-muted); }
+.input, select.input, textarea.input { width: 100%; padding: 11px 12px; border-radius: 4px; border: 1.5px solid var(--steel-400); background: var(--bone-0); color: var(--ink); font: 400 16px/22px var(--body); }
+.input:hover { border-color: var(--ink); }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font: 600 13px/18px var(--body); }
+.badge.ok { background: var(--ok-100); color: var(--ok); }
+.badge.warn { background: var(--warn-100); color: var(--warn); }
+
+/* Footer */
+.footer { background: var(--forge); color: var(--on-forge); padding-block: 44px; font-size: 14px; }
+.footer .wrap { display: grid; grid-template-columns: 2fr 1fr 1.3fr; gap: 40px; }
+.footer .brand { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer a { text-decoration: none; }
+.footer a:hover { color: var(--spark-on-forge); }
+.footer .fine { margin-top: 14px; font-size: 13px; color: rgba(243,240,234,0.75); }
+@media (max-width: 760px) { .footer .wrap { grid-template-columns: 1fr; } }
+
+.sample-note { display: inline-flex; gap: 6px; align-items: center; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* 3D close-up of the sign (assets/js/viewer3d.js) */
+.stage3d { position: relative; border-radius: 12px; overflow: hidden; background: radial-gradient(120% 100% at 40% 25%, #6b6862 0%, #45433f 50%, #2a2927 100%); touch-action: pan-y; cursor: grab; }
+.stage3d:active { cursor: grabbing; }
+.stage3d canvas { display: block; }
+.stage3d .hint3d { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(243,240,234,0.12); color: #f3f0ea; font: 500 12px/16px var(--body); pointer-events: none; }
+.stage3d .zoom3d { position: absolute; right: 12px; bottom: 12px; display: flex; flex-direction: column; gap: 6px; }
+.stage3d .zoom3d button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(243,240,234,0.35); background: rgba(20,19,17,0.55); color: #f3f0ea; font: 500 20px/1 var(--body); cursor: pointer; }
+.stage3d .zoom3d button:hover { background: rgba(20,19,17,0.8); }
+.stage3d .loading3d { position: absolute; inset: 0; display: grid; place-items: center; color: rgba(243,240,234,0.6); font: 500 13px/1 var(--body); pointer-events: none; }

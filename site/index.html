@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marks Metal Signs · Stainless Address Signs</title>
+<meta name="description" content="Stainless steel address signs, precision-cut from 11 gauge 304 stainless. Design yours, see the price, and get a quote for one house or a whole property.">
+<link rel="icon" href="/assets/img/mms-icon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="/assets/img/real-2724-close.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261026k">
+<style>
+/* The home page: the steel hero, then quality (real photos, no text over images) before anyone sees a price. */
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
+section { scroll-margin-top: 72px; }
+
+/* Hero: the headline is a steel plate with the visitor's number cut through it */
+.hero { padding-block: 32px 56px; }
+.hero .top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; align-items: end; }
+.hero h1 { font-size: clamp(32px, 3.8vw, 50px); line-height: 1.04; letter-spacing: -0.01em; margin-top: 12px; }
+.hero .lead { margin-top: 12px; font-size: 16px; line-height: 1.6; color: var(--ink-muted); max-width: 500px; }
+.numform { display: flex; flex-direction: column; gap: 8px; }
+.numform .field-pill { display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 10px; border: 1.5px solid var(--ink); background: var(--bone-0); }
+.numform .field-pill:focus-within { border-color: var(--spark); box-shadow: 0 0 0 3px var(--spark-100); }
+.numform input { flex: 1; min-width: 0; border: 0; background: none; padding: 6px 10px; font: 600 26px/1 var(--display); color: var(--ink); }
+.numform input:focus { outline: none; }
+.numform .btn { white-space: nowrap; }
+.numform .alt { font-size: 13px; color: var(--ink-muted); }
+.band { position: relative; margin-top: 20px; border-radius: 12px; overflow: hidden; background: #8a6a4d url(/assets/walls/cedar.webp) center / cover; aspect-ratio: 21 / 8; display: grid; place-items: center; }
+.band .plate { width: 72%; max-width: 900px; transition: transform 250ms ease; }
+a.band { text-decoration: none; cursor: pointer; border: 2px solid transparent; transition: border-color 200ms, box-shadow 200ms; }
+a.band:hover, a.band:focus-visible { border-color: var(--spark); box-shadow: 0 14px 40px rgba(20,19,17,0.22); }
+a.band:hover .plate { transform: scale(1.02); }
+/* The big call to action sits on the band: a solid pill, so it never clashes with the wood */
+.band .go { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 999px;
+  background: var(--go); color: var(--go-ink); border: 2px solid var(--go-ink); font: 600 20px/1 var(--display); letter-spacing: 0.01em; box-shadow: 0 8px 24px rgba(20,19,17,0.35); animation: pulse 2.4s ease-in-out infinite; white-space: nowrap; }
+a.band:hover .go { background: var(--go-hover); }
+.band .go .arrow, .cue .arrow { display: inline-block; animation: nudge 1.2s ease-in-out infinite; }
+.cue .arrow { animation-name: drop; color: var(--ink); font-size: 20px; }
+.cue { display: inline-flex; align-items: center; gap: 8px; font: 600 15px/1.2 var(--display); color: var(--ink); }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@keyframes drop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+@keyframes pulse { 0%, 100% { box-shadow: 0 8px 24px rgba(20,19,17,0.35), 0 0 0 0 rgba(255,210,63,0.6); } 50% { box-shadow: 0 8px 24px rgba(20,19,17,0.35), 0 0 0 12px rgba(255,210,63,0); } }
+@media (prefers-reduced-motion: reduce) { .band .go, .band .go .arrow, .cue .arrow { animation: none; } }
+@media (max-width: 880px) { .band .go { font-size: 16px; padding: 11px 18px; bottom: 14px; } }
+.band .plate svg { display: block; width: 100%; height: auto; }
+.band-cap { margin-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.band-cap .link { font: 600 16px/1.3 var(--display); letter-spacing: 0; text-transform: none; }
+@media (max-width: 880px) { .hero .top { grid-template-columns: 1fr; gap: 20px; } .band { aspect-ratio: 4 / 3; } .band .plate { width: 92%; } }
+
+/* Look closer: what you're paying for, shown with real photos */
+.closer { padding-block: 64px; border-top: 1px solid var(--hairline); }
+.closer .intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.closer h2, .made h2 { font-size: clamp(26px, 2.8vw, 34px); margin-top: 10px; }
+.closer .intro p.sub { max-width: 440px; font-size: 15px; color: var(--ink-muted); }
+.shots { margin-top: 26px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr); gap: 12px; }
+.shots figure { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.shots .ph { border-radius: 8px; overflow: hidden; border: 1px solid var(--hairline); background: var(--bone-100); }
+.shots img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.shots .a .ph { aspect-ratio: 4 / 3; }
+.shots .b .ph { aspect-ratio: 3 / 4; height: 100%; }
+.shots .c .ph { aspect-ratio: 940 / 788; }
+.points { margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 28px; }
+.points li { list-style: none; display: flex; flex-direction: column; gap: 4px; padding-top: 12px; border-top: 2px solid var(--ink); }
+.points ul { margin: 0; padding: 0; display: contents; }
+.points h3 { font-size: 17px; }
+.points p { font-size: 14px; color: var(--ink-muted); }
+@media (max-width: 880px) { .shots { grid-template-columns: 1fr 1fr; } .shots .a { grid-column: span 2; } .points { grid-template-columns: 1fr; } }
+
+/* About Terran */
+.about { padding-block: 64px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; }
+.about .portrait { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.about .portrait .frame { aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; background: var(--forge); display: grid; place-items: center; border: 1px solid var(--hairline); }
+.about .portrait img { width: 100%; height: 100%; object-fit: cover; }
+.about .portrait img.badge { width: 46%; height: auto; object-fit: contain; }
+.about h2 { font-size: clamp(26px, 2.8vw, 34px); margin-top: 10px; }
+.about .story { margin-top: 14px; display: flex; flex-direction: column; gap: 12px; font-size: 15px; color: var(--ink-muted); max-width: 600px; }
+.stats { margin: 22px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stats div { padding-top: 10px; border-top: 2px solid var(--ink); }
+.stats dt { font: 600 26px/1.1 var(--display); color: var(--ink); }
+.stats dd { margin: 4px 0 0; font-size: 13px; color: var(--ink-muted); }
+@media (max-width: 880px) { .about { grid-template-columns: 1fr; } }
+
+/* Closing band: custom work */
+.closing { padding-block: 48px; }
+.closing .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.closing h2 { font-size: clamp(24px, 2.6vw, 32px); }
+.closing p { margin-top: 6px; color: rgba(243,240,234,0.8); font-size: 15px; max-width: 560px; }
+.closing .mono { color: var(--spark-on-forge); }
+.closing .btn { font-size: 17px; box-shadow: 0 0 0 4px rgba(255,210,63,0.25); }
+
+/* Outside + how it works */
+.facts { padding-block: 56px; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 36px; align-items: center; }
+.facts .rust { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.facts .rust img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--hairline); }
+.facts h2 { font-size: clamp(26px, 2.8vw, 34px); margin-top: 10px; }
+.facts ol { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 14px; }
+.facts li { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 2px solid var(--ink); }
+.facts li h3 { font-size: 17px; }
+.facts li p { font-size: 14px; color: var(--ink-muted); }
+@media (max-width: 880px) { .facts { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header data-nav></header>
+<main>
+  <section class="hero wrap">
+    <div class="top">
+      <div>
+        <p class="mono">Marks Metal Signs &nbsp;/&nbsp; Clear Creek, Indiana</p>
+        <h1 data-w="home.hero.title">Stainless Steel Address Signs</h1>
+        <p class="lead" data-w="home.hero.text">Precision-cut from 11 gauge 304 stainless. For one house or every door on a property.</p>
+      </div>
+      <form class="numform" id="heroForm" action="/design" method="get">
+        <label class="label" for="heroNum" style="margin:0">Type your number</label>
+        <div class="field-pill"><input id="heroNum" name="n" value="2724" maxlength="6" autocomplete="off" aria-label="Your address number"></div>
+        <span class="cue" aria-hidden="true"><span data-w="home.cue">Click the sign to design yours</span> <span class="arrow">↓</span></span>
+      </form>
+    </div>
+    <a class="band" id="heroBand" href="/design?n=2724" aria-label="Design this sign: open the design tool with your number">
+      <div class="plate" id="heroPlate"></div>
+      <span class="go"><span data-w="home.button">See it on your wall</span> <span class="arrow">→</span></span>
+    </a>
+    <div class="band-cap mono"><span>Brushed 304 stainless · 6 inch characters · cut clean through</span><a class="link" href="/custom" data-w="home.customlink">Design something custom!</a></div>
+  </section>
+
+
+  <section class="closer wrap" aria-label="What you're paying for">
+    <div class="intro">
+      <div>
+        <p class="mono" data-w="home.features.label">Key Features</p>
+        <h2 data-w="home.features.title">Precision Craftsmanship</h2>
+      </div>
+      <p class="sub" data-w="home.features.text">Every sign is made to order. Browse photos from the shop below.</p>
+    </div>
+    <div class="shots">
+      <figure class="a"><div class="ph"><img src="/assets/img/store-numbers-set.webp" alt="A set of loose stainless house numbers on dark wood, showing the brushed finish and cut edges" width="1400" height="1050" loading="lazy"></div><figcaption class="mono">Loose numbers · brushed and hand-polished</figcaption></figure>
+      <figure class="b"><div class="ph"><img src="/assets/img/store-number-2.webp" alt="A single stainless number 2 with screw holes, mounted on charred wood" width="1050" height="1400" loading="lazy"></div><figcaption class="mono">6 inch number 2</figcaption></figure>
+      <figure class="c"><div class="ph"><img src="/assets/img/store-measurements.webp" alt="A stainless plate reading 2635 with arrows showing 18 inches wide by 6 inches tall" width="940" height="788" loading="lazy"></div><figcaption class="mono">18 × 6 inch plate</figcaption></figure>
+    </div>
+    <div class="points">
+      <ul>
+        <li><span class="mono">01 · Material</span><h3 data-w="home.feature1.title">304 Stainless Steel</h3><p data-w="home.feature1.text">Solid stainless, about 1/8 inch thick (11 gauge). No coating to wear off.</p></li>
+        <li><span class="mono">02 · Cut</span><h3 data-w="home.feature2.title">CNC Precision-Cut</h3><p data-w="home.feature2.text">Clean lines and consistent characters on every sign.</p></li>
+        <li><span class="mono">03 · Finish</span><h3 data-w="home.feature3.title">Hand-Polished</h3><p data-w="home.feature3.text">Finished by hand after cutting for a smooth surface.</p></li>
+        <li><span class="mono">04 · Mounting</span><h3 data-w="home.feature4.title">Mounting Hardware Included</h3><p data-w="home.feature4.text">Stainless screws and aluminum spacers. The spacers add a subtle shadow.</p></li>
+        <li><span class="mono">05 · Code</span><h3 data-w="home.feature5.title">Easy to Read</h3><p data-w="home.feature5.text">4 and 6 inch characters meet the IFC baseline. Check your local code.</p></li>
+        <li><span class="mono">06 · Inspected</span><h3 data-w="home.feature6.title">Precision Inspected</h3><p data-w="home.feature6.text">Every design is inspected for quality before it is cut.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="facts wrap">
+    <figure class="rust">
+      <img src="/assets/img/store-rustproof.webp" alt="A carbon steel sign reading 7384 covered in rust beside a clean stainless sign reading 4 BAY. Labels: Carbon steel will rust. Stainless won't." width="940" height="788" loading="lazy">
+      <figcaption class="mono">Carbon steel (top) next to stainless (bottom).</figcaption>
+    </figure>
+    <div>
+      <p class="mono" data-w="home.weather.label">Weather Resistance</p>
+      <h2 data-w="home.weather.title">Built to Last</h2>
+      <ol>
+        <li><span class="mono">01 · Rain</span><h3 data-w="home.weather1.title">Rust-Resistant</h3><p data-w="home.weather1.text">Stainless steel holds up to rain and keeps its finish for years.</p></li>
+        <li><span class="mono">02 · Salt and snow</span><h3 data-w="home.weather2.title">All-Weather</h3><p data-w="home.weather2.text">Snow, salt and sun. No paint or sealant to fail.</p></li>
+      </ol>
+    </div>
+  </section>
+
+
+  <section class="about wrap" aria-label="About Terran">
+    <figure class="portrait">
+      <div class="frame"><img src="/assets/img/terran.webp" alt="Terran Marks in his blacksmith shop, leaning on a hammer at the anvil" width="640" height="480" loading="lazy"></div>
+      <figcaption class="mono" data-w="home.about.caption">Terran Marks, the owner, in his blacksmith shop.</figcaption>
+    </figure>
+    <div>
+      <p class="mono" data-w="home.about.label">About</p>
+      <h2 data-w="home.about.title">About Terran Marks</h2>
+      <div class="story">
+        <p data-w="home.about.text">Terran Marks is a traditionally trained blacksmith. With a deep knowledge of metalwork and a dedication to customer satisfaction, he is proud to offer stock and custom address signs for homes, communities, and businesses.</p>
+      </div>
+      <dl class="stats">
+        <div><dt>Indiana</dt><dd>made in Indiana</dd></div>
+        <div><dt>10+ years</dt><dd>in metalwork</dd></div>
+        <div><dt>To order</dt><dd>every sign made for you</dd></div>
+      </dl>
+    </div>
+  </section>
+
+
+  <section class="closing band-forge" aria-label="Custom work">
+    <div class="wrap">
+      <div>
+        <p class="mono">Custom work</p>
+        <h2 data-w="home.custom.title">Custom Work</h2>
+        <p data-w="home.custom.text">Property entrances, logos in steel and one-of-a-kind pieces.</p>
+      </div>
+      <a class="btn lg" href="/custom">Contact us</a>
+    </div>
+  </section>
+</main>
+<footer data-footer></footer>
+<script src="/assets/js/layout.js?v=20261026k"></script>
+<script src="/assets/js/plate.js?v=20261026k"></script>
+<script>
+// The hero plate shows whatever number is typed; the form then opens the design tool with it.
+(function () {
+  var input = document.getElementById('heroNum'), box = document.getElementById('heroPlate');
+  var band = document.getElementById('heroBand');
+  function draw() {
+    var n = input.value.replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6) || '0';
+    var built = BCFPlate.build({ number: n, kind: 'plate', size: 6, font: 'jost', finish: 'brushed' });
+    box.innerHTML = built.svg;
+    // Size the plate by its real width so short numbers don't get blown up: a 4-digit plate (~30 in) fills the usual width.
+    var full = window.matchMedia('(max-width: 880px)').matches ? 92 : 72;
+    box.style.width = Math.max(24, Math.min(96, built.widthIn / 30 * full)) + '%';
+    band.href = '/design?n=' + encodeURIComponent(n);
+  }
+  input.addEventListener('input', draw);
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(draw);
+  window.addEventListener('bcf:fonts', draw);
+})();
+</script>
+<script src="/words.js?v=20261026k"></script>
+</body>
+</html>

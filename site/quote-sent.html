@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your Quote Request · Marks Metal Signs</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/img/mms-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261026k">
+<style>
+.done { display: flex; flex-wrap: wrap; gap: 40px; padding-block: 56px 96px; align-items: flex-start; }
+.done .left { flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.done .right { flex: 1 1 360px; min-width: 0; }
+.done h1 { font-size: clamp(34px, 5vw, 48px); }
+dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 0; }
+dt { font: 600 12px/22px var(--body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+dd { margin: 0; overflow-wrap: anywhere; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+@media print { [data-nav], [data-footer], .actions, .noprint { display: none !important; } body { background: #fff; } .panel { border: 0; } }
+</style>
+</head>
+<body>
+<header data-nav></header>
+<main class="wrap done">
+  <div class="left">
+    <p class="eyebrow">Quote request</p>
+    <h1 id="title">Send us your request</h1>
+    <p class="lead" id="lead">Your choices are below. Tap the button to email them to us. Every design is reviewed and priced, and we reply with a final price. Nothing is cut until you approve it.</p>
+    <p class="help" style="margin-top:8px">Custom signs are made to order and final sale. See the <a href="/returns">returns policy</a>.</p>
+    <div class="actions noprint">
+      <a class="btn lg" id="mail" href="mailto:browncountyforge@gmail.com">Email my request</a>
+      <button class="btn ghost" id="copy" type="button">Copy the details</button>
+      <button class="btn ghost" id="print" type="button">Print or save as PDF</button>
+    </div>
+    <p class="help noprint" id="copied" role="status"></p>
+  </div>
+  <div class="right panel">
+    <span class="wordmark" style="margin-bottom:14px" aria-label="Marks Metal Signs"><b>MARKS</b><span>METAL SIGNS</span></span>
+    <dl id="details"><dt>Request</dt><dd>No design found. Start in <a href="/design">Design your sign</a>.</dd></dl>
+    <p class="help" style="margin-top:16px">Every quote is reviewed and priced before anything is cut.</p>
+  </div>
+</main>
+<footer data-footer></footer>
+<script src="/assets/js/layout.js?v=20261026k"></script>
+<script>
+(function () {
+  var s = null;
+  try { s = JSON.parse(sessionStorage.getItem('bcf-quote') || 'null'); } catch (e) {}
+  if (!s) return;
+  var labels = { type: 'Request', idea: 'Vision', questions: 'Questions', number: 'Number', property: 'Property', doors: 'Doors', units: 'Unit numbers', unitList: 'Every unit', style: 'Style', placement: 'Placement', orientation: 'Orientation', tier: 'Tier', size: 'Character height', font: 'Font', finish: 'Finish', wall: 'Wall', addons: 'Add-on signs', price: 'Price', perDoor: 'Per door', total: 'Total', name: 'Name', email: 'Email', phone: 'Phone', notes: 'Notes' };
+  var rows = Object.keys(labels).filter(function (k) { return s[k]; });
+  if (s.sent) {
+    document.getElementById('title').textContent = 'We have your request.';
+    document.getElementById('lead').textContent = 'Your request was sent. Every design is reviewed and priced, and we reply by email with a final price. Nothing is cut until you approve it.';
+    document.getElementById('mail').hidden = true;
+  }
+  var dl = document.getElementById('details');
+  dl.innerHTML = '';
+  rows.forEach(function (k) {
+    var dt = document.createElement('dt'); dt.textContent = labels[k];
+    var dd = document.createElement('dd'); dd.textContent = s[k];
+    dl.append(dt, dd);
+  });
+  var text = rows.map(function (k) { return labels[k] + ': ' + s[k]; }).join('\n');
+  document.getElementById('mail').href = 'mailto:browncountyforge@gmail.com?subject=' + encodeURIComponent('Quote request: ' + (s.number || s.property || s.type)) + '&body=' + encodeURIComponent(text);
+  document.getElementById('copy').addEventListener('click', function () {
+    var msg = document.getElementById('copied');
+    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () { msg.textContent = 'Copied. Paste it into an email to browncountyforge@gmail.com.'; })
+      .catch(function () { msg.textContent = 'Copy blocked by your browser. Select the details on the right instead.'; });
+  });
+  document.getElementById('print').addEventListener('click', function () { window.print(); });
+  if (new URLSearchParams(location.search).get('print')) { document.getElementById('title').textContent = 'Your property quote'; setTimeout(function () { window.print(); }, 400); }
+})();
+</script>
+</body>
+</html>
