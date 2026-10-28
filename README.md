@@ -33,6 +33,12 @@ Everything is in the `site` folder. Each page is one file:
 - **Prices:** all prices are in `site/assets/js/pricing.js`.
 - **Photos:** add a photo to `site/assets/img` and list it on the page that shows it.
 
+## Hosting and the domain
+
+- **The host (Vercel)** stores the site's files and shows them to visitors. It serves the site securely (the "https" lock), keeps it fast everywhere, and publishes each update automatically.
+- **The domain** (for example marksmetalsigns.com) is the site's name. It's bought separately, from a registrar like Namecheap or GoDaddy. Two settings at the registrar point the name to the host.
+- **Switching hosts:** the site is plain HTML, CSS and JavaScript with no special setup, so it can move to another host (Netlify, Cloudflare Pages, or a Namecheap or GoDaddy hosting plan) by moving the `site` folder. The domain stays the same.
+
 ## History
 
 Every change is saved with a date in this repository's history, so any earlier version of the site can be brought back.
