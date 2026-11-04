@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&family=Besley:wght@700&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261103b">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261103c">
 <style>
 /* One column until there's room for two. The same rule decides side by side and pinning, so the preview can
    never stay pinned over the choices; it only pins when the window is tall enough to show all of it. */
@@ -286,7 +286,7 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
       <div class="ctl"><span class="label">Finish</span>
         <div class="seg" id="finish" role="group" aria-label="Finish">
           <button type="button" data-v="brushed" aria-pressed="true"><span class="sw" style="background:linear-gradient(110deg,#d4d7d5,#a5a9a8,#dfe1df)"></span>Brushed</button>
-          <button type="button" data-v="black" aria-pressed="false"><span class="sw" style="background:#232324"></span>Black<span class="lvl premium">Premium +$20</span></button>
+          <button type="button" data-v="black" aria-pressed="false"><span class="sw" style="background:#232324"></span>Black<span class="lvl premium">Premium</span></button>
         </div>
       </div>
       <div class="ctl"><span class="label" id="wallLabel">Your wall</span>
@@ -364,14 +364,14 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261103b"></script>
-<script src="/assets/js/plate.js?v=20261103b"></script>
-<script src="/assets/js/pricing.js?v=20261103b"></script>
-<script src="/assets/js/quote.js?v=20261103b"></script>
-<script src="/assets/js/design.js?v=20261103b"></script>
-<script type="module" src="/assets/js/photo.js?v=20261103b"></script>
+<script src="/assets/js/layout.js?v=20261103c"></script>
+<script src="/assets/js/plate.js?v=20261103c"></script>
+<script src="/assets/js/pricing.js?v=20261103c"></script>
+<script src="/assets/js/quote.js?v=20261103c"></script>
+<script src="/assets/js/design.js?v=20261103c"></script>
+<script type="module" src="/assets/js/photo.js?v=20261103c"></script>
 <script type="module">
-import { mount } from '/assets/js/viewer3d.js?v=20261103b';
+import { mount } from '/assets/js/viewer3d.js?v=20261103c';
 // Flat or 3D: the same sign on the same wall. The 3D view loads the first time someone picks it.
 const flat = document.getElementById('stage'), stage = document.getElementById('stage3d'), mode = document.getElementById('mode');
 let viewer = null, last = window.BCFSign || {};
@@ -388,6 +388,6 @@ mode.addEventListener('click', (e) => {
   }
 });
 </script>
-<script src="/words.js?v=20261103b"></script>
+<script src="/words.js?v=20261103c"></script>
 </body>
 </html>

@@ -82,7 +82,7 @@
     $('was').hidden = $('off').hidden = !deal;
     $('wasPrice').textContent = money(q.listEach);
     $('off').textContent = Math.round((1 - q.perSign / q.listEach) * 100) + '% off';
-    $('save').textContent = deal ? 'You save ' + money(BCFPricing.round((q.listEach - q.perSign) * count)) + ' vs. buying one at a time' : '';
+    $('save').textContent = deal ? 'Property pricing saves you ' + money(BCFPricing.round((q.listEach - q.perSign) * count)) + ' on ' + count + ' doors' : '';
     if (!deal || !fresh || still) return;
     (motion || (motion = import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm').catch(function () { return null; }))).then(function (m) {
       if (!m) return;

@@ -2,7 +2,7 @@
 (function () {
   var here = location.pathname.replace(/\/$/, '/index').split('/').pop().replace('.html', '') || 'index';
   // [page, label, href]. Homes and properties both start in the design tool.
-  var links = [['design', 'Design your sign'], ['custom', 'Custom work'], ['work', 'Installed work'], ['about', 'About', '/#about']];
+  var links = [['design', 'Design your sign'], ['custom', 'Custom work'], ['work', 'Installed work'], ['about', 'About']];
   var nav = document.querySelector('[data-nav]');
   if (nav) {
     nav.className = 'nav';
@@ -29,7 +29,7 @@
     foot.innerHTML =
       '<div class="wrap">' +
       '<div class="brand"><span class="wordmark lg"><b>MARKS</b><span>METAL SIGNS</span></span>' +
-      '<p>Stainless address signs, precision-cut from 11 gauge 304 stainless in Clear Creek, Indiana.</p></div>' +
+      '<p>Stainless steel address signs, precision cut for homes and properties of every size. Made in Clear Creek, Indiana.</p></div>' +
       '<ul>' + links.map(function (l) { return '<li><a href="' + (l[2] || '/' + l[0]) + '">' + l[1] + '</a></li>'; }).join('') + '</ul>' +
       '<div><p>Clear Creek, Indiana</p><p>browncountyforge@gmail.com</p>' +
       '<p class="fine">© ' + new Date().getFullYear() + ' Marks Metal Signs · <a href="/privacy">Privacy</a> · <a href="/returns">Returns</a></p></div>' +

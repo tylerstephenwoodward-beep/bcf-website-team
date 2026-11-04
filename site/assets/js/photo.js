@@ -1,7 +1,7 @@
 // "See it on your own wall": a pop-up that shows how to take the photo, then takes one from this device or
 // from the customer's phone. The phone route shows a QR code for /snap?k=<id>; the phone sends its photo
 // straight to this page over WebRTC (PeerJS only introduces the two devices), so the photo is never stored.
-import { art, animateArt, loadMotion } from '/assets/js/photo-art.js?v=20261103b';
+import { art, animateArt, loadMotion } from '/assets/js/photo-art.js?v=20261103c';
 
 const $ = (id) => document.getElementById(id);
 const dlg = $('photoDlg'), qrBox = $('qr'), qrStatus = $('qrStatus');

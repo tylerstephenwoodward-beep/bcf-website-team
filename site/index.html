@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261103b">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261103c">
 <style>
 /* The home page: the steel hero, then quality (real photos, no text over images) before anyone sees a price. */
 .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
@@ -69,19 +69,6 @@ a.band:hover .go { background: var(--go-hover); }
 .points p { font-size: 14px; color: var(--ink-muted); }
 @media (max-width: 880px) { .shots { grid-template-columns: 1fr 1fr; } .shots .a { grid-column: span 2; } .points { grid-template-columns: 1fr; } }
 
-/* About Terran */
-.about { padding-block: 48px; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; }
-.about .portrait { margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.about .portrait .frame { aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; background: var(--forge); display: grid; place-items: center; border: 1px solid var(--hairline); }
-.about .portrait img { width: 100%; height: 100%; object-fit: cover; }
-.about .portrait img.badge { width: 46%; height: auto; object-fit: contain; }
-.about h2 { font-size: clamp(26px, 2.8vw, 34px); margin-top: 10px; }
-.about .story { margin-top: 14px; display: flex; flex-direction: column; gap: 12px; font-size: 15px; color: var(--ink-muted); max-width: 600px; }
-.stats { margin: 22px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.stats div { padding-top: 10px; border-top: 2px solid var(--ink); }
-.stats dt { font: 600 26px/1.1 var(--display); color: var(--ink); }
-.stats dd { margin: 4px 0 0; font-size: 13px; color: var(--ink-muted); }
-@media (max-width: 880px) { .about { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .stats dt { font-size: 19px; } }
 
 /* Closing band: custom work */
@@ -90,7 +77,8 @@ a.band:hover .go { background: var(--go-hover); }
 .closing h2 { font-size: clamp(24px, 2.6vw, 32px); }
 .closing p { margin-top: 6px; color: rgba(243,240,234,0.8); font-size: 15px; max-width: 560px; }
 .closing .mono { color: var(--spark-on-forge); }
-.closing .btn { font-size: 17px; box-shadow: 0 0 0 4px rgba(255,210,63,0.25); }
+.closing .btn { font-size: 17px; background: var(--link); border-color: var(--link); color: #fff; }
+.closing .btn:hover { background: var(--link-hover); border-color: var(--link-hover); }
 
 /* Outside + how it works */
 .facts { padding-block: 56px; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 36px; align-items: center; }
@@ -128,24 +116,6 @@ a.band:hover .go { background: var(--go-hover); }
   </section>
 
 
-  <section class="about wrap" id="about" aria-label="About Terran">
-    <figure class="portrait">
-      <div class="frame"><img src="/assets/img/terran.webp" alt="Terran Marks in his blacksmith shop, leaning on a hammer at the anvil" width="640" height="480" loading="lazy"></div>
-      <figcaption class="mono" data-w="home.about.caption">Terran Marks, the owner, in his blacksmith shop.</figcaption>
-    </figure>
-    <div>
-      <p class="mono" data-w="home.about.label">About</p>
-      <h2 data-w="home.about.title">About Terran Marks</h2>
-      <div class="story">
-        <p data-w="home.about.text">Terran Marks is a traditionally trained blacksmith. With a deep knowledge of metalwork and a dedication to customer satisfaction, he is proud to offer stock and custom address signs for homes, communities, and businesses.</p>
-      </div>
-      <dl class="stats">
-        <div><dt>Indiana</dt><dd>made in Indiana</dd></div>
-        <div><dt>15+ years</dt><dd>in metalwork</dd></div>
-        <div><dt>Made to order</dt><dd>every sign made for you</dd></div>
-      </dl>
-    </div>
-  </section>
 
   <section class="closer wrap" aria-label="What you're paying for">
     <div class="intro">
@@ -202,8 +172,8 @@ a.band:hover .go { background: var(--go-hover); }
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261103b"></script>
-<script src="/assets/js/plate.js?v=20261103b"></script>
+<script src="/assets/js/layout.js?v=20261103c"></script>
+<script src="/assets/js/plate.js?v=20261103c"></script>
 <script>
 // The hero plate shows whatever number is typed; the form then opens the design tool with it.
 (function () {
@@ -223,6 +193,6 @@ a.band:hover .go { background: var(--go-hover); }
   window.addEventListener('bcf:fonts', draw);
 })();
 </script>
-<script src="/words.js?v=20261103b"></script>
+<script src="/words.js?v=20261103c"></script>
 </body>
 </html>

@@ -15,6 +15,7 @@ Everything is in the `site` folder. Each page is one file:
 | Design Your Sign | `site/design.html` |
 | Custom Work | `site/custom.html` |
 | Installed Work | `site/work.html` |
+| About | `site/about.html` |
 | Quote request confirmation | `site/quote-sent.html` |
 | Returns policy | `site/returns.html` |
 | Privacy | `site/privacy.html` |

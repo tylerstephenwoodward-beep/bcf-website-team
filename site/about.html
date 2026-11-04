@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About · Marks Metal Signs</title>
+<meta name="description" content="About Terran Marks and Marks Metal Signs: stainless steel address signs, made to order in Clear Creek, Indiana.">
+<link rel="icon" href="/assets/img/mms-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261103c">
+<style>
+/* The About page. A first version: Terran is writing his own story, so the sections marked "Coming soon" are
+   placeholders until he sends it. */
+.about-page { padding-block: 32px 88px; }
+.soon-note { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; background: var(--bone-100); border: 1px dashed var(--steel-400); font-size: 14px; color: var(--ink-muted); }
+.soon-note b { color: var(--ink); }
+.intro { margin-top: 22px; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px; align-items: center; }
+.intro h1 { font-size: clamp(32px, 4.2vw, 48px); margin-top: 8px; }
+.intro .lead { margin-top: 14px; font-size: 17px; line-height: 1.6; color: var(--ink-muted); max-width: 560px; }
+.intro figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.intro figure img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; border: 1px solid var(--hairline); }
+.intro figcaption { font: 400 12px/1.5 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
+.stats { margin: 26px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 560px; }
+.stats div { padding-top: 10px; border-top: 2px solid var(--ink); }
+.stats dt { font: 600 24px/1.1 var(--display); }
+.stats dd { margin: 4px 0 0; font-size: 13px; color: var(--ink-muted); }
+.blocks { margin-top: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.blocks div { padding: 20px; border-radius: 10px; background: var(--bone-0); border: 1px solid var(--hairline); }
+.blocks h2 { font-size: 19px; }
+.blocks p { margin-top: 6px; font-size: 14px; color: var(--ink-muted); }
+.soon { margin-top: 48px; padding: 24px; border-radius: 10px; border: 1px dashed var(--steel-400); background: var(--bone-0); }
+.soon h2 { font-size: 22px; }
+.soon ul { margin: 12px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: var(--ink-muted); }
+.cta { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn.blue { background: var(--link); border-color: var(--link); color: #fff; }
+.btn.blue:hover { background: var(--link-hover); border-color: var(--link-hover); }
+@media (max-width: 880px) { .intro, .blocks { grid-template-columns: 1fr; } .intro figure { order: -1; } }
+</style>
+</head>
+<body>
+<header data-nav></header>
+<main class="wrap about-page">
+  <p class="soon-note"><b>Coming soon:</b> Terran is writing more about himself and the shop.</p>
+
+  <section class="intro" aria-label="About Terran Marks">
+    <div>
+      <p class="eyebrow">About</p>
+      <h1 data-w="about.title">About Terran Marks</h1>
+      <p class="lead" data-w="about.text">Terran Marks is a traditionally trained blacksmith. With a deep knowledge of metalwork and a dedication to customer satisfaction, he is proud to offer stock and custom address signs for homes, communities, and businesses.</p>
+      <dl class="stats">
+        <div><dt>Indiana</dt><dd>made in Indiana</dd></div>
+        <div><dt>15+ years</dt><dd>in metalwork</dd></div>
+        <div><dt>Made to order</dt><dd>every sign made for you</dd></div>
+      </dl>
+    </div>
+    <figure>
+      <img src="/assets/img/terran.webp" alt="Terran Marks in his blacksmith shop, leaning on a hammer at the anvil" width="640" height="480">
+      <figcaption data-w="about.caption">Terran Marks, the owner, in his blacksmith shop.</figcaption>
+    </figure>
+  </section>
+
+  <section class="blocks" aria-label="What we make">
+    <div><h2>For homes</h2><p>Stainless steel address signs, made to order and shipped ready to mount.</p></div>
+    <div><h2>For properties</h2><p>Matching signs for every door on an apartment, HOA or business property.</p></div>
+    <div><h2>Custom work</h2><p>Names, logos and shapes, cut in steel to your design.</p></div>
+  </section>
+
+  <section class="soon" aria-label="Coming soon">
+    <h2>Coming soon</h2>
+    <ul>
+      <li>Terran's story, in his own words</li>
+      <li>How a sign is made, from design to your front door</li>
+      <li>More photos from the shop</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <a class="btn lg" href="/design">Design your sign</a>
+    <a class="btn lg blue" href="/custom">Contact us</a>
+  </div>
+</main>
+<footer data-footer></footer>
+<script src="/assets/js/layout.js?v=20261103c"></script>
+<script src="/words.js?v=20261103c"></script>
+</body>
+</html>
