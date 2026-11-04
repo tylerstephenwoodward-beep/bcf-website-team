@@ -3,7 +3,7 @@
   var WALL_WIDTH_IN = 40; // every wall photo is 40 inches wide (walls.json)
   var params = new URLSearchParams(location.search);
   var state = {
-    number: (params.get('n') || '2724').replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6), kind: 'plate', orient: 'h', align: 'center', size: 6, font: 'jost', finish: 'brushed',
+    number: (params.get('n') || '2724').replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6), kind: 'plate', orient: 'h', size: 6, font: 'jost', finish: 'brushed',
     forwho: params.get('for') === 'property' || +params.get('doors') > 1 ? 'property' : 'home',
     doors: Math.max(2, +params.get('doors') || 24),
     wall: 'cedar', paint: 'white', photo: null, scale: 1, pos: { x: 0.5, y: 0.45 }
@@ -28,20 +28,18 @@
   // Rules between options:
   // - Vertical signs only come as a cut plate.
   // - Loose numbers come 6 inch in Futura (Terran's store), side by side. A custom font is still allowed.
-  // - Placement (left, center, right) applies to horizontal cut plates.
+  // - Numbers are always centered on the plate (customers ask in the quote notes for anything else).
   // - Fire code: a font's strokes must be at least 1/2 inch at the chosen size (BCFPlate.meetsCode).
   function syncOptions() {
     var vertical = state.orient === 'v', loose = state.kind === 'loose';
     if (vertical && state.kind !== 'plate') { state.kind = 'plate'; loose = false; }
     if (loose) { state.size = 6; if (state.font !== 'custom') state.font = 'jost'; }
     var thin = function (font, size) { return font !== 'custom' && !BCFPlate.meetsCode(font, size) && BCFPlate.FONTS[font].label + ' is too thin at 4 inch for the fire code (1/2 inch strokes)'; };
-    var noAlign = (state.kind !== 'plate' || vertical) && 'Placement is for horizontal cut plates';
     var rules = {
       kind: { bar: vertical && 'Vertical signs come as a cut plate', loose: vertical && 'Vertical signs come as a cut plate' },
       orient: { v: loose && 'Loose numbers go side by side' },
       size: { 4: loose && 'Loose numbers come 6 inch' || thin(state.font, 4) },
-      font: { arimo: loose && 'Loose numbers come in Futura' || thin('arimo', state.size), besley: loose && 'Loose numbers come in Futura' || thin('besley', state.size) },
-      align: { left: noAlign, center: noAlign, right: noAlign }
+      font: { arimo: loose && 'Loose numbers come in Futura' || thin('arimo', state.size), besley: loose && 'Loose numbers come in Futura' || thin('besley', state.size) }
     };
     Object.keys(rules).forEach(function (group) {
       document.querySelectorAll('#' + group + ' [data-v]').forEach(function (x) {
@@ -76,42 +74,67 @@
   var drawFont = function () { return state.font === 'custom' ? 'jost' : state.font; }; // custom fonts preview in Futura
   var chars = function () { return (state.number || '0').replace(/\s/g, '').length; };
 
+  // The bulk discount on property orders: the single-sign price struck through, the percent off and the savings.
+  // Motion (motion.dev) draws the strike and pops the badge when the discount first appears.
+  var motion = null;
+  function showDeal(q, property, count, fresh) {
+    var deal = property && !q.custom && q.listEach > q.perSign;
+    $('was').hidden = $('off').hidden = !deal;
+    $('wasPrice').textContent = money(q.listEach);
+    $('off').textContent = Math.round((1 - q.perSign / q.listEach) * 100) + '% off';
+    $('save').textContent = deal ? 'You save ' + money(BCFPricing.round((q.listEach - q.perSign) * count)) + ' vs. buying one at a time' : '';
+    if (!deal || !fresh || still) return;
+    (motion || (motion = import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm').catch(function () { return null; }))).then(function (m) {
+      if (!m) return;
+      m.animate($('was').querySelector('.strike'), { scaleX: [0, 1] }, { duration: 0.45, delay: 0.15, ease: 'easeOut' });
+      m.animate($('off'), { opacity: [0, 1], scale: [0.6, 1] }, { type: 'spring', stiffness: 420, damping: 18, delay: 0.4 });
+      m.animate($('save'), { opacity: [0, 1], y: [6, 0] }, { duration: 0.35, delay: 0.5 });
+    });
+  }
+
   // Price from the choices (pricing.js). Home is one sign; property is a set per door; loose numbers are per character.
   function renderPrice() {
     var property = state.forwho === 'property', count = property ? state.doors : 1;
-    var q = BCFPricing.quote({ font: state.font, kind: state.kind, chars: chars(), property: property }, count);
+    var q = BCFPricing.quote({ font: state.font, kind: state.kind, chars: chars(), property: property, finish: state.finish }, count);
+    // Switching to a property order: the door price counts down from the single-sign price, so the bulk discount shows.
+    var turnedProperty = property && $('tool').dataset.property === 'no';
+    if (turnedProperty) $('perDoor').dataset.v = q.listEach;
     $('tool').dataset.property = property ? 'yes' : 'no';
     $('tool').dataset.custom = q.custom ? 'yes' : 'no';
     $('tool').dataset.loose = q.tier === 'loose' ? 'yes' : 'no';
     $('tierWhy').textContent = q.custom ? 'Custom fonts are quoted separately.'
       : q.tier === 'loose' ? chars() + ' numbers at ' + money(BCFPricing.looseEach) + ' each.'
-      : property ? 'Each door gets its own set, ' + money(BCFPricing.perDoor) + ' a door.' : '';
+      : property ? 'Each door gets its own set, ' + money(q.perSign) + ' a door.' : '';
     countTo($('price'), q.perSign);
     countTo($('perDoor'), q.perSign);
     countTo($('total'), q.total);
+    showDeal(q, property, count, turnedProperty);
     $('totalLabel').textContent = count + ' doors';
     // One-line recap of the design above the quote form.
     $('qsum').textContent = [state.number || '0', STYLE[state.kind], state.orient === 'v' ? 'Vertical' : 'Horizontal',
-      state.kind === 'plate' && state.orient === 'h' ? state.align.charAt(0).toUpperCase() + state.align.slice(1) : '',
       state.size + ' inch', fontLabel(), BCFPlate.FINISHES[state.finish].label, q.label,
       q.custom ? 'quoted separately' : property ? count + ' doors at ' + money(q.perSign) + ' = ' + money(q.total) : money(q.perSign)].filter(Boolean).join(' · ');
     return q;
   }
 
   // Once the choices stack under the preview (phones), "Who's it for?" moves right under the preview, above the price.
-  var forwhoCtl = $('forwhoCtl'), controls = forwhoCtl.parentNode, viewer = document.querySelector('.tool .viewer');
+  var forwhoCtl = $('forwhoCtl'), controls = forwhoCtl.parentNode, narrow = matchMedia('(max-width: 1039px)');
   function placeForwho() {
     var inSlot = forwhoCtl.parentNode === $('forwhoSlot');
-    var stacked = controls.getBoundingClientRect().top > viewer.getBoundingClientRect().top + 40;
+    var stacked = narrow.matches;
     if (stacked && !inSlot) $('forwhoSlot').appendChild(forwhoCtl);
     else if (!stacked && inSlot) controls.insertBefore(forwhoCtl, controls.firstElementChild);
   }
   placeForwho();
-  window.addEventListener('resize', placeForwho);
+  narrow.addEventListener('change', placeForwho);
+  // The preview pins just under the menu on phones (design.html), so it needs the menu's height.
+  function navHeight() { var n = document.querySelector('.nav'); if (n) document.documentElement.style.setProperty('--nav-h', n.offsetHeight + 'px'); }
+  navHeight();
+  window.addEventListener('resize', navHeight);
 
   function render() {
     var vertical = state.orient === 'v';
-    var align = state.kind === 'plate' && !vertical ? state.align : undefined;
+    var align = state.kind === 'plate' && !vertical ? 'center' : undefined; // a standard length plate, numbers centered
     var opts = { number: state.number || '0', kind: state.kind, vertical: vertical, align: align, size: state.size, font: drawFont(), finish: state.finish };
     // Vertical signs are tall, so the wall gets taller too (the 40 inch wide photo repeats downward).
     [stage, $('stage3d')].forEach(function (el) { el.classList.toggle('tall', vertical); });
@@ -120,7 +143,7 @@
     stage.classList.toggle('own', !!state.photo); // a customer's photo fills the stage once, never repeated
     place(sign, BCFPlate.build(opts), state.photo ? state.scale : 1, state.pos);
     var d = BCFPlate.dims(opts);
-    $('dims').textContent = (vertical ? 'Vertical ' : '') + ({ bar: 'numbers on a bar, about ', loose: 'loose numbers, about ' }[state.kind] || 'plate about ') + Math.round(d.width) + ' × ' + Math.round(d.height) + ' in';
+    $('dims').textContent = (vertical ? 'Vertical ' : '') + ({ bar: 'numbers on a bar, about ', loose: 'loose numbers, about ' }[state.kind] || 'plate about ') + Math.round(d.width) + ' in × ' + Math.round(d.height) + ' in';
     $('dims').textContent = $('dims').textContent.charAt(0).toUpperCase() + $('dims').textContent.slice(1);
     var c = $('comply');
     c.className = 'badge ' + (state.size === 4 ? 'warn' : 'ok');
@@ -208,7 +231,6 @@
   });
 
   chips('kind', 'kind');
-  chips('align', 'align');
   syncOptions();
   chips('orient', 'orient');
   chips('size', 'size', Number);
@@ -238,7 +260,7 @@
       type: property ? 'Property order' : 'Home sign', property: property ? $('qprop').value.trim() : '',
       doors: property ? String(state.doors) : '', tier: q.label,
       units: property ? $('qunits').value.trim() : '',
-      number: state.number, style: STYLE[state.kind], placement: state.kind === 'plate' && state.orient === 'h' ? state.align : '',
+      number: state.number, style: STYLE[state.kind],
       orientation: state.orient === 'v' ? 'Vertical' : 'Horizontal',
       size: state.size + ' inch', font: fontLabel(), finish: BCFPlate.FINISHES[state.finish].label,
       wall: state.photo ? 'Customer photo (kept on their device)' : (wallEntry.label + (wallEntry.paintable ? ', ' + state.paint.replace('_', ' ') : '')),

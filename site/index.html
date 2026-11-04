@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261026k">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261103b">
 <style>
 /* The home page: the steel hero, then quality (real photos, no text over images) before anyone sees a price. */
 .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
@@ -70,7 +70,7 @@ a.band:hover .go { background: var(--go-hover); }
 @media (max-width: 880px) { .shots { grid-template-columns: 1fr 1fr; } .shots .a { grid-column: span 2; } .points { grid-template-columns: 1fr; } }
 
 /* About Terran */
-.about { padding-block: 64px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; }
+.about { padding-block: 48px; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; }
 .about .portrait { margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .about .portrait .frame { aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; background: var(--forge); display: grid; place-items: center; border: 1px solid var(--hairline); }
 .about .portrait img { width: 100%; height: 100%; object-fit: cover; }
@@ -82,6 +82,7 @@ a.band:hover .go { background: var(--go-hover); }
 .stats dt { font: 600 26px/1.1 var(--display); color: var(--ink); }
 .stats dd { margin: 4px 0 0; font-size: 13px; color: var(--ink-muted); }
 @media (max-width: 880px) { .about { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .stats dt { font-size: 19px; } }
 
 /* Closing band: custom work */
 .closing { padding-block: 48px; }
@@ -127,6 +128,25 @@ a.band:hover .go { background: var(--go-hover); }
   </section>
 
 
+  <section class="about wrap" id="about" aria-label="About Terran">
+    <figure class="portrait">
+      <div class="frame"><img src="/assets/img/terran.webp" alt="Terran Marks in his blacksmith shop, leaning on a hammer at the anvil" width="640" height="480" loading="lazy"></div>
+      <figcaption class="mono" data-w="home.about.caption">Terran Marks, the owner, in his blacksmith shop.</figcaption>
+    </figure>
+    <div>
+      <p class="mono" data-w="home.about.label">About</p>
+      <h2 data-w="home.about.title">About Terran Marks</h2>
+      <div class="story">
+        <p data-w="home.about.text">Terran Marks is a traditionally trained blacksmith. With a deep knowledge of metalwork and a dedication to customer satisfaction, he is proud to offer stock and custom address signs for homes, communities, and businesses.</p>
+      </div>
+      <dl class="stats">
+        <div><dt>Indiana</dt><dd>made in Indiana</dd></div>
+        <div><dt>15+ years</dt><dd>in metalwork</dd></div>
+        <div><dt>Made to order</dt><dd>every sign made for you</dd></div>
+      </dl>
+    </div>
+  </section>
+
   <section class="closer wrap" aria-label="What you're paying for">
     <div class="intro">
       <div>
@@ -138,7 +158,7 @@ a.band:hover .go { background: var(--go-hover); }
     <div class="shots">
       <figure class="a"><div class="ph"><img src="/assets/img/store-numbers-set.webp" alt="A set of loose stainless house numbers on dark wood, showing the brushed finish and cut edges" width="1400" height="1050" loading="lazy"></div><figcaption class="mono">Loose numbers · brushed and hand-polished</figcaption></figure>
       <figure class="b"><div class="ph"><img src="/assets/img/store-number-2.webp" alt="A single stainless number 2 with screw holes, mounted on charred wood" width="1050" height="1400" loading="lazy"></div><figcaption class="mono">6 inch number 2</figcaption></figure>
-      <figure class="c"><div class="ph"><img src="/assets/img/store-measurements.webp" alt="A stainless plate reading 2635 with arrows showing 18 inches wide by 6 inches tall" width="940" height="788" loading="lazy"></div><figcaption class="mono">18 × 6 inch plate</figcaption></figure>
+      <figure class="c"><div class="ph"><img src="/assets/img/store-measurements.webp" alt="A stainless plate reading 2635 with arrows showing 18 inches wide by 6 inches tall" width="940" height="788" loading="lazy"></div><figcaption class="mono">18 in × 6 in plate</figcaption></figure>
     </div>
     <div class="points">
       <ul>
@@ -168,24 +188,6 @@ a.band:hover .go { background: var(--go-hover); }
   </section>
 
 
-  <section class="about wrap" aria-label="About Terran">
-    <figure class="portrait">
-      <div class="frame"><img src="/assets/img/terran.webp" alt="Terran Marks in his blacksmith shop, leaning on a hammer at the anvil" width="640" height="480" loading="lazy"></div>
-      <figcaption class="mono" data-w="home.about.caption">Terran Marks, the owner, in his blacksmith shop.</figcaption>
-    </figure>
-    <div>
-      <p class="mono" data-w="home.about.label">About</p>
-      <h2 data-w="home.about.title">About Terran Marks</h2>
-      <div class="story">
-        <p data-w="home.about.text">Terran Marks is a traditionally trained blacksmith. With a deep knowledge of metalwork and a dedication to customer satisfaction, he is proud to offer stock and custom address signs for homes, communities, and businesses.</p>
-      </div>
-      <dl class="stats">
-        <div><dt>Indiana</dt><dd>made in Indiana</dd></div>
-        <div><dt>10+ years</dt><dd>in metalwork</dd></div>
-        <div><dt>To order</dt><dd>every sign made for you</dd></div>
-      </dl>
-    </div>
-  </section>
 
 
   <section class="closing band-forge" aria-label="Custom work">
@@ -200,8 +202,8 @@ a.band:hover .go { background: var(--go-hover); }
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261026k"></script>
-<script src="/assets/js/plate.js?v=20261026k"></script>
+<script src="/assets/js/layout.js?v=20261103b"></script>
+<script src="/assets/js/plate.js?v=20261103b"></script>
 <script>
 // The hero plate shows whatever number is typed; the form then opens the design tool with it.
 (function () {
@@ -221,6 +223,6 @@ a.band:hover .go { background: var(--go-hover); }
   window.addEventListener('bcf:fonts', draw);
 })();
 </script>
-<script src="/words.js?v=20261026k"></script>
+<script src="/words.js?v=20261103b"></script>
 </body>
 </html>

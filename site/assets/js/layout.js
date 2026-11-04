@@ -2,7 +2,7 @@
 (function () {
   var here = location.pathname.replace(/\/$/, '/index').split('/').pop().replace('.html', '') || 'index';
   // [page, label, href]. Homes and properties both start in the design tool.
-  var links = [['design', 'Design your sign'], ['custom', 'Custom work'], ['work', 'Installed work']];
+  var links = [['design', 'Design your sign'], ['custom', 'Custom work'], ['work', 'Installed work'], ['about', 'About', '/#about']];
   var nav = document.querySelector('[data-nav]');
   if (nav) {
     nav.className = 'nav';
