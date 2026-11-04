@@ -29,7 +29,6 @@ window.BCF_WORDS = {
   "home.weather2.text": "Snow, salt and sun. No paint or sealant to fail.",
   "about.title": "About Terran Marks",
   "about.text": "Terran Marks is a traditionally trained blacksmith. With a deep knowledge of metalwork and a dedication to customer satisfaction, he is proud to offer stock and custom address signs for homes, communities, and businesses.",
-  "about.caption": "Terran Marks, the owner, in his blacksmith shop.",
   "home.custom.title": "Custom Work",
   "home.custom.text": "Property entrances, logos in steel and one-of-a-kind pieces.",
   "home.cue": "Click the sign to design yours",
