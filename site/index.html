@@ -17,7 +17,7 @@
 section { scroll-margin-top: 72px; }
 
 /* Hero: the wood fills the screen width, a steel headline, the visitor's number cut through a live plate, and a black control bar along the bottom */
-.hero { position: relative; background: #6f5038 url(/assets/walls/cedar.webp) center / cover; display: flex; flex-direction: column; min-height: min(calc(100svh - 68px), 760px); }
+.hero { position: relative; background: #6f5038 url(/assets/hero/cedar.webp) center / cover; display: flex; flex-direction: column; min-height: min(calc(100svh - 68px), 760px); }
 .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(20,19,17,.8) 0%, rgba(20,19,17,.25) 34%, rgba(20,19,17,.06) 62%, rgba(20,19,17,.2) 100%); }
 .hero .top { position: relative; padding-top: 44px; text-align: center; }
 .hero .top .mono { color: var(--go); }
@@ -31,22 +31,45 @@ section { scroll-margin-top: 72px; }
 .hero .stage:hover .plate { transform: scale(1.02); }
 /* The black bar: number, Design your sign and the custom button, all centered */
 .hero .bar { position: relative; background: rgba(20,19,17,.88); backdrop-filter: blur(6px); }
-.hero .bar .wrap { display: flex; align-items: center; justify-content: center; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+.hero .bar .wrap { display: flex; align-items: flex-end; justify-content: center; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
 .hero .bar .num { text-align: center; }
-.hero .bar label { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--go); }
-.hero .bar input { display: block; margin-top: 4px; width: 150px; text-align: center; background: transparent; border: 0; border-radius: 0; border-bottom: 2px solid var(--go); color: #fff; font: 600 28px/1.1 var(--display); padding: 2px 0; }
-.hero .bar input:focus { outline: none; border-color: #fff; }
-.hero .go, .hero .custom { display: inline-flex; align-items: center; justify-content: center; padding: 12px 22px; border-radius: 999px; font: 600 17px/1 var(--display); text-decoration: none; white-space: nowrap; transition: background 150ms, transform 150ms; }
+.hero .bar label { display: block; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--go); margin-bottom: 6px; }
+/* The number box: framed in yellow with a pencil, and a soft pulse until it is used, so it reads as "change me" */
+.hero .field { position: relative; display: flex; align-items: center; width: 190px; border-radius: 12px; border: 2px solid var(--go); background: rgba(255,255,255,.07); cursor: text; animation: invite 2.2s ease-in-out infinite; transition: background 150ms, border-color 150ms; }
+.hero .field:hover { background: rgba(255,255,255,.12); }
+.hero .field:focus-within { animation: none; background: rgba(255,255,255,.14); border-color: #fff; box-shadow: 0 0 0 4px rgba(255,210,63,.35); }
+.hero.touched .field { animation: none; }
+.hero .bar input { display: block; width: 100%; min-width: 0; text-align: center; background: transparent; border: 0; color: #fff; font: 600 28px/1 var(--display); padding: 0 40px 0 16px; height: 46px; letter-spacing: .02em; }
+.hero .bar input:focus { outline: none; }
+.hero .field svg { position: absolute; right: 12px; color: var(--go); pointer-events: none; }
+@keyframes invite { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,210,63,.45); } 50% { box-shadow: 0 0 0 7px rgba(255,210,63,0); } }
+@media (prefers-reduced-motion: reduce) { .hero .field { animation: none; } }
+/* Wall swatches: a small pill on the wood just above the bar */
+.hero .walls { position: relative; align-self: center; display: flex; gap: 8px; margin-bottom: 16px; padding: 6px; border-radius: 999px; background: rgba(20,19,17,.62); backdrop-filter: blur(6px); }
+.hero .walls button { width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); background: center / cover; cursor: pointer; padding: 0; }
+.hero .walls button[aria-pressed="true"] { border-color: var(--go); box-shadow: 0 0 0 2px var(--forge), 0 0 0 4px var(--go); }
+.hero .go, .hero .custom { display: inline-flex; align-items: center; justify-content: center; height: 50px; padding: 0 22px; border-radius: 999px; font: 600 17px/1 var(--display); text-decoration: none; white-space: nowrap; transition: background 150ms, transform 150ms; }
 .hero .go { background: var(--go); color: var(--go-ink); border: 2px solid var(--go-ink); }
 .hero .go:hover { background: var(--go-hover); transform: translateY(-1px); }
 .hero .custom { background: var(--link); color: #fff; border: 2px solid var(--link); }
 .hero .custom:hover { background: var(--link-hover); border-color: var(--link-hover); transform: translateY(-1px); }
 @media (max-width: 880px) {
-  .hero { min-height: 0; } .hero .top { padding-top: 32px; }
+  .hero { min-height: 0; background-image: url(/assets/hero/cedar-m.webp); } .hero .top { padding-top: 32px; }
   .hero .bar .wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 12px; }
-  .hero .bar .num { grid-column: 1 / -1; } .hero .bar input { width: 100%; }
-  .hero .go, .hero .custom { padding: 12px 10px; font-size: 16px; }
+  .hero .bar .num { grid-column: 1 / -1; } .hero .field { width: 100%; }
+  .hero .go, .hero .custom { padding: 0 10px; font-size: 16px; }
 }
+
+/* About, short: who makes the signs. The About page has the longer story. */
+.about { padding-block: 56px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; }
+.about figure { margin: 0; }
+.about img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; border: 1px solid var(--hairline); }
+.about h2 { font-size: clamp(26px, 2.8vw, 34px); margin-top: 10px; }
+.about p.text { margin-top: 12px; font-size: 16px; line-height: 1.6; color: var(--ink-muted); max-width: 580px; }
+.about .facts-row { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+.about .facts-row span { padding: 7px 12px; border-radius: 999px; background: var(--bone-100); font: 500 13px/1 var(--body); }
+.about .more { display: inline-block; margin-top: 20px; font: 600 16px/1.3 var(--display); }
+@media (max-width: 880px) { .about { grid-template-columns: 1fr; gap: 22px; padding-block: 40px; } }
 
 /* Look closer: what you're paying for, shown with real photos */
 .closer { padding-block: 64px; border-top: 1px solid var(--hairline); }
@@ -99,16 +122,32 @@ section { scroll-margin-top: 72px; }
       <h1 data-w="home.hero.title">Stainless Steel Address Signs</h1>
     </div>
     <a class="stage" id="heroBand" href="/design?n=2724" aria-label="Design this sign: open the design tool with your number"><div class="plate" id="heroPlate"></div></a>
+    <div class="walls" role="group" aria-label="Show it on a different wall">
+      <button type="button" data-wall="cedar" aria-pressed="true" style="background-image:url(/assets/walls/cedar.webp)" aria-label="Cedar"></button>
+      <button type="button" data-wall="brick" aria-pressed="false" style="background-image:url(/assets/walls/brick.webp)" aria-label="Brick"></button>
+      <button type="button" data-wall="board_batten-white" aria-pressed="false" style="background-image:url(/assets/walls/board_batten-white.webp)" aria-label="White siding"></button>
+      <button type="button" data-wall="stucco-greige" aria-pressed="false" style="background-image:url(/assets/walls/stucco-greige.webp)" aria-label="Stucco"></button>
+      <button type="button" data-wall="board_batten-black" aria-pressed="false" style="background-image:url(/assets/walls/board_batten-black.webp)" aria-label="Black siding"></button>
+    </div>
     <form class="bar" id="heroForm" action="/design" method="get">
       <div class="wrap">
-        <div class="num"><label for="heroNum">Your number</label><input id="heroNum" name="n" value="2724" maxlength="6" autocomplete="off"></div>
+        <div class="num"><label for="heroNum">Type your number</label><div class="field"><input id="heroNum" name="n" value="2724" maxlength="6" autocomplete="off" enterkeyhint="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div></div>
         <a class="go" id="heroGo" href="/design?n=2724" data-w="home.button">Design your sign</a>
         <a class="custom" href="/custom" data-w="home.customlink">Something custom?</a>
       </div>
     </form>
   </section>
 
-
+  <section class="about wrap" id="about" aria-label="About Terran Marks">
+    <figure><img src="/assets/img/terran.webp" alt="Terran Marks in his blacksmith shop, leaning on a hammer at the anvil" width="640" height="480" loading="lazy"></figure>
+    <div>
+      <p class="mono">Who makes your sign</p>
+      <h2 data-w="about.title">About Terran Marks</h2>
+      <p class="text" data-w="about.text">Terran Marks is a traditionally trained blacksmith. With a deep knowledge of metalwork and a dedication to customer satisfaction, he is proud to offer stock and custom address signs for homes, communities, and businesses.</p>
+      <div class="facts-row"><span>15+ years in metalwork</span><span>Made to order</span><span>Clear Creek, Indiana</span></div>
+      <a class="link more" href="/about">More about Terran &rarr;</a>
+    </div>
+  </section>
 
   <section class="closer wrap" aria-label="What you're paying for">
     <div class="intro">
@@ -182,6 +221,18 @@ section { scroll-margin-top: 72px; }
     band.href = document.getElementById('heroGo').href = '/design?n=' + encodeURIComponent(n);
   }
   input.addEventListener('input', draw);
+  var hero = document.getElementById('hero');
+  // Tapping the number selects it, so typing replaces it; the pulse stops once it has been used.
+  input.addEventListener('focus', function () { hero.classList.add('touched'); setTimeout(function () { input.select(); }, 0); });
+  // Wall swatches: sharp hero renders, a lighter file on phones.
+  var phone = window.matchMedia('(max-width: 880px)');
+  document.querySelectorAll('[data-wall]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('[data-wall]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      hero.style.backgroundImage = 'url(/assets/hero/' + b.dataset.wall + (phone.matches ? '-m' : '') + '.webp)';
+      hero.classList.add('touched');
+    });
+  });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(draw);
   window.addEventListener('bcf:fonts', draw);
 })();
