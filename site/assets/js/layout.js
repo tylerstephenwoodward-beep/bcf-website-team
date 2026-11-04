@@ -22,6 +22,22 @@
       var open = ul.classList.toggle('open');
       btn.setAttribute('aria-expanded', open);
     });
+
+    // Phones and tablets: the menu bar slides away while you scroll down and comes back as soon as you scroll up.
+    // --nav-h is its height; --nav-shown is how much of it is on screen, so pinned things (the design preview) sit right under it.
+    var root = document.documentElement, narrow = window.matchMedia('(max-width: 1039px)'), lastY = window.scrollY, ticking = false;
+    function measure() { root.style.setProperty('--nav-h', nav.offsetHeight + 'px'); }
+    function onScroll() {
+      ticking = false;
+      var y = window.scrollY, dy = y - lastY;
+      if (!narrow.matches || ul.classList.contains('open') || y < nav.offsetHeight) root.classList.remove('nav-up');
+      else if (dy > 6) root.classList.add('nav-up');
+      else if (dy < -6) root.classList.remove('nav-up');
+      if (Math.abs(dy) > 6 || y < nav.offsetHeight) lastY = y;
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   }
   var foot = document.querySelector('[data-footer]');
   if (foot) {

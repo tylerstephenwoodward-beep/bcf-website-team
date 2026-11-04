@@ -44,6 +44,12 @@ p { margin: 0; }
 
 /* Nav */
 .nav { position: sticky; top: 0; z-index: 20; background: var(--forge); color: var(--on-forge); }
+/* Phones and tablets: the bar hides on scroll down and returns on scroll up (layout.js sets .nav-up) */
+:root { --nav-shown: var(--nav-h, 60px); }
+html.nav-up { --nav-shown: 0px; }
+.nav { transition: transform 220ms ease; }
+html.nav-up .nav { transform: translateY(-100%); }
+@media (prefers-reduced-motion: reduce) { .nav { transition: none; } }
 .nav .wrap { display: flex; align-items: center; gap: 24px; padding-block: 6px; }
 /* Text wordmark until Terran's Marks Metal Signs logo arrives. */
 .wordmark { display: inline-flex; flex-direction: column; align-items: flex-start; font-family: var(--display); line-height: 1; color: inherit; }
@@ -109,7 +115,7 @@ p { margin: 0; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
 /* 3D close-up of the sign (assets/js/viewer3d.js) */
-.stage3d { position: relative; border-radius: 12px; overflow: hidden; background: radial-gradient(120% 100% at 40% 25%, #6b6862 0%, #45433f 50%, #2a2927 100%); touch-action: pan-y; cursor: grab; }
+.stage3d { position: relative; border-radius: 12px; overflow: hidden; background: radial-gradient(120% 100% at 40% 25%, #6b6862 0%, #45433f 50%, #2a2927 100%); touch-action: none; overscroll-behavior: contain; cursor: grab; }
 .stage3d:active { cursor: grabbing; }
 .stage3d canvas { display: block; }
 .stage3d .hint3d { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(243,240,234,0.12); color: #f3f0ea; font: 500 12px/16px var(--body); pointer-events: none; }

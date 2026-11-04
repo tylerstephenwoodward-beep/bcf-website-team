@@ -304,12 +304,18 @@
     var number = String(opts.number || '2724').replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6) || '0';
     var font = FONTS[opts.font] || FONTS.jost;
     var finish = FINISHES[opts.finish] || FINISHES.brushed;
+    // smooth: the older look (a soft light sweep with very faint lines), used where the sign is shown small,
+    // like the home page, because the brushed grain reads as coarse stripes there.
+    var smooth = opts.smooth && finish.grain;
+    if (smooth) finish = Object.assign({}, finish, { stops: ['#d4d7d5', '#a5a9a8', '#dfe1df', '#9ea2a1', '#c9ccca'], smooth: true });
     var size = opts.size === 4 ? 4 : 6;
     var fs = size * U / font.digit;
     var textAttrs = 'font-family="' + font.css + ', sans-serif" font-weight="700" font-size="' + fs.toFixed(1) + '" text-anchor="start" dominant-baseline="alphabetic"';
     var defs = gradient(id + 'g', finish.stops) +
       // One texture pixel = 4 units (0.04 in), so the streaks read as fine brushing at any sign size.
-      (finish.grain ? '<pattern id="' + id + 'grain" width="4800" height="1600" patternUnits="userSpaceOnUse">' +
+      (smooth ? '<pattern id="' + id + 'grain" width="400" height="3" patternUnits="userSpaceOnUse">' +
+        '<rect width="400" height="1" fill="rgba(255,255,255,0.22)"/><rect y="1.6" width="400" height="0.8" fill="rgba(0,0,0,0.06)"/></pattern>'
+      : finish.grain ? '<pattern id="' + id + 'grain" width="4800" height="1600" patternUnits="userSpaceOnUse">' +
         '<image href="' + brushTexture() + '" width="4800" height="1600" preserveAspectRatio="none"/></pattern>' : '') +
       '<radialGradient id="' + id + 'screw" cx="0.35" cy="0.3" r="0.8">' + finish.screw.map(function (c, i) {
         return '<stop offset="' + [0, 0.55, 1][i] + '" stop-color="' + c + '"/>';
@@ -374,7 +380,7 @@
       '</defs>' +
       '<g filter="url(#' + id + 's)"><g mask="url(#' + id + 'm)">' +
       '<rect x="' + m + '" y="' + m + '" width="' + plateW.toFixed(1) + '" height="' + plateH.toFixed(1) + '" rx="' + (0.12 * U) + '" fill="url(#' + id + 'g)"/>' +
-      (finish.grain ? '<rect x="' + m + '" y="' + m + '" width="' + plateW.toFixed(1) + '" height="' + plateH.toFixed(1) + '" rx="' + (0.12 * U) + '" fill="url(#' + id + 'grain)" opacity="0.82"/>' : '') +
+      (finish.grain ? '<rect x="' + m + '" y="' + m + '" width="' + plateW.toFixed(1) + '" height="' + plateH.toFixed(1) + '" rx="' + (0.12 * U) + '" fill="url(#' + id + 'grain)"' + (finish.smooth ? '' : ' opacity="0.82"') + '/>' : '') +
       '<rect x="' + (m + 2) + '" y="' + (m + 2) + '" width="' + (plateW - 4).toFixed(1) + '" height="' + (plateH - 4).toFixed(1) + '" rx="' + (0.12 * U) + '" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>' +
       '</g></g>' +
       screws.map(function (p, k) { return screw(p[0], p[1], r, id + 'screw', k); }).join('') +
@@ -407,7 +413,7 @@
       '</defs>' +
       '<g filter="url(#' + id + 's)"><g mask="url(#' + id + 'm)">' +
       '<rect x="' + m + '" y="' + m + '" width="' + plateW.toFixed(1) + '" height="' + plateH.toFixed(1) + '" rx="' + (0.12 * U) + '" fill="url(#' + id + 'g)"/>' +
-      (finish.grain ? '<rect x="' + m + '" y="' + m + '" width="' + plateW.toFixed(1) + '" height="' + plateH.toFixed(1) + '" rx="' + (0.12 * U) + '" fill="url(#' + id + 'grain)" opacity="0.82"/>' : '') +
+      (finish.grain ? '<rect x="' + m + '" y="' + m + '" width="' + plateW.toFixed(1) + '" height="' + plateH.toFixed(1) + '" rx="' + (0.12 * U) + '" fill="url(#' + id + 'grain)"' + (finish.smooth ? '' : ' opacity="0.82"') + '/>' : '') +
       '</g></g>' +
       screws.map(function (p, k) { return screw(p[0], p[1], r, id + 'screw', k); }).join('') +
       '</svg>';

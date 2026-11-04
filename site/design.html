@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&family=Besley:wght@700&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261103d">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261103e">
 <style>
 /* One column until there's room for two. The same rule decides side by side and pinning, so the preview can
    never stay pinned over the choices; it only pins when the window is tall enough to show all of it. */
@@ -167,7 +167,10 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   .pricebox .pricefoot, .pricebox .tierline { display: none; }
   .price strong, .totals strong { font-size: 28px; }
   .totals { gap: 6px 24px; margin-top: 0; }
-  .preview { order: 3; position: sticky; top: var(--nav-h, 60px); z-index: 5; margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r)); padding: 8px var(--gutter-r) 8px var(--gutter-l); background: var(--bone-50); }
+  .preview { order: 3; position: sticky; top: var(--nav-shown, 60px); z-index: 5; margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r)); padding: 8px var(--gutter-r) 8px var(--gutter-l); background: var(--bone-50); transition: top 220ms ease, box-shadow 200ms; }
+  /* Once it's pinned, a hairline and a soft shadow underneath set it apart from the choices scrolling under it */
+  .preview.stuck { border-bottom: 1px solid var(--hairline); box-shadow: 0 10px 18px -12px rgba(20,19,17,0.5); }
+  .preview .stage, .preview .stage3d { box-shadow: 0 0 0 1px rgba(20,19,17,0.22); }
   .preview .stage, .preview .stage3d { border-radius: 10px; }
   .preview .stage.tall, .preview .stage3d.tall { aspect-ratio: 1 / 1; }
   /* keep the pinned preview to about 40% of the screen height on tablets, so the choices stay in view */
@@ -364,14 +367,14 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261103d"></script>
-<script src="/assets/js/plate.js?v=20261103d"></script>
-<script src="/assets/js/pricing.js?v=20261103d"></script>
-<script src="/assets/js/quote.js?v=20261103d"></script>
-<script src="/assets/js/design.js?v=20261103d"></script>
-<script type="module" src="/assets/js/photo.js?v=20261103d"></script>
+<script src="/assets/js/layout.js?v=20261103e"></script>
+<script src="/assets/js/plate.js?v=20261103e"></script>
+<script src="/assets/js/pricing.js?v=20261103e"></script>
+<script src="/assets/js/quote.js?v=20261103e"></script>
+<script src="/assets/js/design.js?v=20261103e"></script>
+<script type="module" src="/assets/js/photo.js?v=20261103e"></script>
 <script type="module">
-import { mount } from '/assets/js/viewer3d.js?v=20261103d';
+import { mount } from '/assets/js/viewer3d.js?v=20261103e';
 // Flat or 3D: the same sign on the same wall. The 3D view loads the first time someone picks it.
 const flat = document.getElementById('stage'), stage = document.getElementById('stage3d'), mode = document.getElementById('mode');
 let viewer = null, last = window.BCFSign || {};
@@ -387,7 +390,22 @@ mode.addEventListener('click', (e) => {
     stage.querySelector('.loading3d').remove();
   }
 });
+// Dragging on the 3D view turns the sign and never scrolls the page (iPhones ignore touch-action on their own).
+// The zoom buttons still take taps.
+stage.addEventListener('touchmove', (e) => { if (!e.target.closest('button')) e.preventDefault(); }, { passive: false });
+
+// Phones: mark the preview once it's pinned under the menu, so it gets its edge and shadow.
+const preview = document.querySelector('.preview');
+let stuckTick = false;
+function checkStuck() {
+  stuckTick = false;
+  const pinned = getComputedStyle(preview).position === 'sticky' && window.scrollY > 0 &&
+    preview.getBoundingClientRect().top <= parseFloat(getComputedStyle(preview).top) + 1;
+  preview.classList.toggle('stuck', pinned);
+}
+window.addEventListener('scroll', () => { if (!stuckTick) { stuckTick = true; requestAnimationFrame(checkStuck); } }, { passive: true });
+checkStuck();
 </script>
-<script src="/words.js?v=20261103d"></script>
+<script src="/words.js?v=20261103e"></script>
 </body>
 </html>

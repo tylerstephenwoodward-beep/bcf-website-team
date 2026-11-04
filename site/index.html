@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261103d">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261103e">
 <style>
 /* The home page: the steel hero, then quality (real photos, no text over images) before anyone sees a price. */
 .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
@@ -165,8 +165,8 @@ section { scroll-margin-top: 72px; }
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261103d"></script>
-<script src="/assets/js/plate.js?v=20261103d"></script>
+<script src="/assets/js/layout.js?v=20261103e"></script>
+<script src="/assets/js/plate.js?v=20261103e"></script>
 <script>
 // The hero plate shows whatever number is typed; the form then opens the design tool with it.
 (function () {
@@ -174,7 +174,7 @@ section { scroll-margin-top: 72px; }
   var band = document.getElementById('heroBand');
   function draw() {
     var n = input.value.replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6) || '0';
-    var built = BCFPlate.build({ number: n, kind: 'plate', size: 6, font: 'jost', finish: 'brushed' });
+    var built = BCFPlate.build({ number: n, kind: 'plate', size: 6, font: 'jost', finish: 'brushed', smooth: true });
     box.innerHTML = built.svg;
     // Size the plate by its real width so short numbers don't get blown up: a 4-digit plate (~30 in) fills the usual width.
     var full = window.matchMedia('(max-width: 880px)').matches ? 92 : 62;
@@ -186,6 +186,6 @@ section { scroll-margin-top: 72px; }
   window.addEventListener('bcf:fonts', draw);
 })();
 </script>
-<script src="/words.js?v=20261103d"></script>
+<script src="/words.js?v=20261103e"></script>
 </body>
 </html>
