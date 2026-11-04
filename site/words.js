@@ -32,8 +32,8 @@ window.BCF_WORDS = {
   "home.custom.title": "Custom Work",
   "home.custom.text": "Property entrances, logos in steel and one-of-a-kind pieces.",
   "home.cue": "Click the sign to design yours",
-  "home.customlink": "Design something custom!",
-  "home.button": "See it on your wall",
+  "home.customlink": "Something custom?",
+  "home.button": "Design your sign",
 
   // Design your sign page
   "design.title": "Design Your Sign",
