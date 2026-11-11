@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261111a">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261111b">
 <style>
 .snap { display: flex; flex-direction: column; gap: 16px; max-width: 480px; padding-block: 20px 40px; }
 .snap h1 { font-size: 28px; }
@@ -43,11 +43,11 @@
   <p class="state" id="state" aria-live="polite"></p>
   <p class="help">Your phone may ask to let this page use the camera. Tap Allow, or choose a photo you already have. The photo goes straight to the design page on your computer and is never stored or shared. <a href="/privacy">Privacy</a></p>
 </main>
-<script src="/assets/js/layout.js?v=20261111a"></script>
+<script src="/assets/js/layout.js?v=20261111b"></script>
 <script type="module">
 // The phone half of the QR handoff (photo.js has the computer half): take a photo, shrink it, and send it
 // directly to the design page that showed the code.
-import { art, animateArt } from '/assets/js/photo-art.js?v=20261111a';
+import { art, animateArt } from '/assets/js/photo-art.js?v=20261111b';
 const $ = (id) => document.getElementById(id);
 const say = (text, kind) => { $('state').textContent = text; $('state').className = 'state ' + (kind || ''); };
 $('art').innerHTML = art;

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261111a">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261111b">
 <style>
 /* The home page: the steel hero, then quality (real photos, no text over images) before anyone sees a price. */
 .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
@@ -78,7 +78,15 @@ section { scroll-margin-top: 72px; }
 @media (max-width: 880px) { .about { grid-template-columns: 1fr; gap: 22px; padding-block: 40px; } }
 
 /* Look closer: what you're paying for, shown with real photos */
-.closer { padding-block: 64px; border-top: 1px solid var(--hairline); }
+.closer { padding-block: 64px; }
+/* Precision Craftsmanship: a dark band with a yellow line top and bottom, so it stands apart from the light sections */
+.craft { border-block: 4px solid var(--go); }
+.craft h2 { color: #fff; }
+.craft .closer .intro p.sub, .craft .points p { color: rgba(243,240,234,0.8); }
+.craft .shots figcaption { color: rgba(243,240,234,0.65); }
+.craft .shots .ph { border-color: rgba(243,240,234,0.18); }
+.craft .points h3 { color: #fff; }
+.craft .points .mono { color: var(--go); }
 .closer .intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
 .closer h2, .made h2 { font-size: clamp(26px, 2.8vw, 34px); margin-top: 10px; }
 .closer .intro p.sub { max-width: 440px; font-size: 15px; color: var(--ink-muted); }
@@ -90,7 +98,7 @@ section { scroll-margin-top: 72px; }
 .shots .ph { aspect-ratio: 5 / 4; }
 .closer .keyhead { margin-top: 64px; font-size: clamp(26px, 2.8vw, 34px); }
 .points { margin-top: 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 28px; }
-.points li { list-style: none; display: flex; flex-direction: column; gap: 4px; padding-top: 12px; border-top: 2px solid var(--ink); }
+.points li { list-style: none; display: flex; flex-direction: column; gap: 4px; padding-top: 12px; border-top: 2px solid var(--go); }
 .points ul { margin: 0; padding: 0; display: contents; }
 .points h3 { font-size: 19px; }
 .points p { font-size: 16px; line-height: 1.55; color: var(--ink-muted); }
@@ -114,15 +122,11 @@ section { scroll-margin-top: 72px; }
 .facts { padding-block: 64px; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 36px; align-items: center; }
 .facts .rust { margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .facts .rust img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--hairline); }
-.facts h2 { font-size: clamp(36px, 4.4vw, 56px); margin-top: 10px; color: #fff; }
+.facts h2 { font-size: clamp(36px, 4.4vw, 56px); margin-top: 10px; }
 .facts ol { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 14px; }
-.facts li { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 2px solid var(--go); }
-.facts li h3 { font-size: 21px; color: #fff; }
-.facts li p { font-size: 16px; line-height: 1.55; color: rgba(243,240,234,0.8); }
-/* Built to Last: a dark band of its own, so it reads as the call-out it is */
-.lasts { border-top: 4px solid var(--go); }
-.lasts .mono { color: var(--go); }
-.lasts .facts .rust img { border-color: rgba(243,240,234,0.18); }
+.facts li { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 2px solid var(--ink); }
+.facts li h3 { font-size: 21px; }
+.facts li p { font-size: 16px; line-height: 1.55; color: var(--ink-muted); }
 @media (max-width: 880px) { .facts { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -163,7 +167,8 @@ section { scroll-margin-top: 72px; }
     </div>
   </section>
 
-  <section class="closer wrap" aria-label="What you're paying for">
+  <section class="craft band-forge" aria-label="What you're paying for">
+  <div class="closer wrap">
     <div class="intro">
       <div>
         <h2 data-w="home.features.title">Precision Craftsmanship</h2>
@@ -186,9 +191,10 @@ section { scroll-margin-top: 72px; }
         <li><span class="mono">06 · Inspected</span><h3 data-w="home.feature6.title">Precision Inspected</h3><p data-w="home.feature6.text">Every design is inspected for quality before it is cut.</p></li>
       </ul>
     </div>
+  </div>
   </section>
 
-  <section class="lasts band-forge" aria-label="Built to last">
+  <section class="lasts" aria-label="Built to last">
   <div class="facts wrap">
     <figure class="rust">
       <img src="/assets/img/store-rustproof.webp" alt="A carbon steel sign reading 7384 covered in rust beside a clean stainless sign reading 4 BAY. Labels: Carbon steel will rust. Stainless won't." width="940" height="788" loading="lazy">
@@ -219,8 +225,8 @@ section { scroll-margin-top: 72px; }
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261111a"></script>
-<script src="/assets/js/plate.js?v=20261111a"></script>
+<script src="/assets/js/layout.js?v=20261111b"></script>
+<script src="/assets/js/plate.js?v=20261111b"></script>
 <script>
 // The hero plate shows whatever number is typed; the form then opens the design tool with it.
 (function () {
@@ -271,6 +277,6 @@ section { scroll-margin-top: 72px; }
   window.addEventListener('bcf:fonts', draw);
 })();
 </script>
-<script src="/words.js?v=20261111a"></script>
+<script src="/words.js?v=20261111b"></script>
 </body>
 </html>

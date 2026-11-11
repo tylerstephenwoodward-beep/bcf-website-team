@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&family=Besley:wght@700&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261111a">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261111b">
 <style>
 /* Title with a small "Start over" link that forgets the saved design */
 .titlerow { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
@@ -372,14 +372,14 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261111a"></script>
-<script src="/assets/js/plate.js?v=20261111a"></script>
-<script src="/assets/js/pricing.js?v=20261111a"></script>
-<script src="/assets/js/quote.js?v=20261111a"></script>
-<script src="/assets/js/design.js?v=20261111a"></script>
-<script type="module" src="/assets/js/photo.js?v=20261111a"></script>
+<script src="/assets/js/layout.js?v=20261111b"></script>
+<script src="/assets/js/plate.js?v=20261111b"></script>
+<script src="/assets/js/pricing.js?v=20261111b"></script>
+<script src="/assets/js/quote.js?v=20261111b"></script>
+<script src="/assets/js/design.js?v=20261111b"></script>
+<script type="module" src="/assets/js/photo.js?v=20261111b"></script>
 <script type="module">
-import { mount } from '/assets/js/viewer3d.js?v=20261111a';
+import { mount } from '/assets/js/viewer3d.js?v=20261111b';
 // Flat or 3D: the same sign on the same wall. The 3D view loads the first time someone picks it.
 const flat = document.getElementById('stage'), stage = document.getElementById('stage3d'), mode = document.getElementById('mode');
 let viewer = null, last = window.BCFSign || {};
@@ -411,6 +411,6 @@ function checkStuck() {
 window.addEventListener('scroll', () => { if (!stuckTick) { stuckTick = true; requestAnimationFrame(checkStuck); } }, { passive: true });
 checkStuck();
 </script>
-<script src="/words.js?v=20261111a"></script>
+<script src="/words.js?v=20261111b"></script>
 </body>
 </html>
