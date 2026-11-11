@@ -6,8 +6,8 @@
 (function () {
   var U = 100; // SVG units per inch
   // stroke: the thinnest main stroke of any digit as a share of digit height, measured from the bold
-  // stand-in fonts (2026-10-22). Fire code (IFC 505.1) needs at least a 0.5 inch stroke, so a font
-  // only works at a size where stroke x size >= 0.5. Re-measure when the licensed fonts arrive.
+  // fonts below. Fire code (IFC 505.1) needs at least a 0.5 inch stroke, so a font only works at a
+  // size where stroke x size >= 0.5. Re-measure if a font changes.
   var FONTS = {
     jost: { css: 'Jost', label: 'Futura', digit: 0.70, stroke: 0.17 },
     arimo: { css: 'Arimo', label: 'Helvetica', digit: 0.716, stroke: 0.139 },
@@ -19,7 +19,7 @@
   var FINISHES = {
     brushed: { label: 'Brushed stainless', stops: ['#c4c7c7', '#aeb2b2', '#cdd0d0', '#a9adad', '#c0c3c3'], grain: true, screw: ['#f4f5f4', '#a9adab', '#5f6362'] },
     black: { label: 'Black powder coat', stops: ['#2c2c2d', '#1d1d1e', '#262627', '#1a1a1b', '#232324'], screw: ['#55565a', '#262628', '#0e0e0f'] },
-    // Bronze and white are not offered on the site until Terran confirms them (decision 2026-10-21).
+    // Bronze and white are built in but not offered on the site.
     bronze: { label: 'Bronze powder coat', stops: ['#5e4733', '#45331f', '#59432f', '#3f2f1d', '#523d29'], screw: ['#8a6c4f', '#4f3a25', '#2c2014'] },
     white: { label: 'White powder coat', stops: ['#f0efea', '#dddbd4', '#ecebe5', '#d8d6cf', '#e7e6e0'], screw: ['#ffffff', '#e2e0da', '#a9a7a1'] }
   };

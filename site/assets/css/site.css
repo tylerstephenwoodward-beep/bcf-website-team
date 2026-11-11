@@ -14,7 +14,7 @@
   --spark-hover: #8f380b;
   --spark-on-forge: #ffd23f; /* yellow underlines and labels on the black bands (nav, footer, custom band) */
   --spark-100: #f6e3d3;
-  /* Main buttons are yellow with black text; links are blue (Terran, 2026-10-25). */
+  /* Main buttons are yellow with black text; links are blue. */
   --go: #ffd23f; --go-hover: #f2c200; --go-ink: #141311;
   --link: #1f5fbf; --link-hover: #174a96; --link-on-forge: #8cbcff;
   --ok: #1f5f7a; --ok-100: #e1eef3;

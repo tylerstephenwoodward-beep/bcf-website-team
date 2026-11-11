@@ -1,4 +1,4 @@
-// All prices on the site come from this file. These are Terran's prices (2026-10-25, bulk price and black updated 2026-11-03):
+// All prices on the site come from this file:
 // a plate or numbers on a bar for a home, a set per door for apartments and communities, and loose numbers per character.
 // Black powder coat is the premium finish: a set amount more per sign (per set of loose numbers).
 // Custom fonts and custom work (property names, logos, shapes) are quoted by Terran, so they have no price here.
