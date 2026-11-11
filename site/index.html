@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261103e">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261111a">
 <style>
 /* The home page: the steel hero, then quality (real photos, no text over images) before anyone sees a price. */
 .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
@@ -47,17 +47,23 @@ section { scroll-margin-top: 72px; }
 /* Wall swatches: a small pill on the wood just above the bar */
 .hero .walls { position: relative; align-self: center; display: flex; gap: 8px; margin-bottom: 16px; padding: 6px; border-radius: 999px; background: rgba(20,19,17,.62); backdrop-filter: blur(6px); }
 .hero .walls button { width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); background: center / cover; cursor: pointer; padding: 0; }
-.hero .walls button[aria-pressed="true"] { border-color: var(--go); box-shadow: 0 0 0 2px var(--forge), 0 0 0 4px var(--go); }
+/* No highlight on the picked wall: the wall behind the sign already shows it */
+.hero .walls button { transition: border-color 150ms, transform 150ms; }
+.hero .walls button:hover { border-color: rgba(255,255,255,.75); transform: scale(1.08); }
 .hero .go, .hero .custom { display: inline-flex; align-items: center; justify-content: center; height: 50px; padding: 0 22px; border-radius: 999px; font: 600 17px/1 var(--display); text-decoration: none; white-space: nowrap; transition: background 150ms, transform 150ms; }
 .hero .go { background: var(--go); color: var(--go-ink); border: 2px solid var(--go-ink); }
 .hero .go:hover { background: var(--go-hover); transform: translateY(-1px); }
 .hero .custom { background: var(--link); color: #fff; border: 2px solid var(--link); }
+.hero .resume { flex-basis: 100%; text-align: center; color: var(--go); font: 600 15px/1.3 var(--display); text-underline-offset: 3px; }
+.hero .resume[hidden] { display: none; }
+.hero .resume:hover { color: #fff; }
 .hero .custom:hover { background: var(--link-hover); border-color: var(--link-hover); transform: translateY(-1px); }
 @media (max-width: 880px) {
   .hero { min-height: 0; background-image: url(/assets/hero/cedar-m.webp); } .hero .top { padding-top: 32px; }
   .hero .bar .wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 12px; }
   .hero .bar .num { grid-column: 1 / -1; } .hero .field { width: 100%; }
   .hero .go, .hero .custom { padding: 0 10px; font-size: 16px; }
+  .hero .resume { grid-column: 1 / -1; }
 }
 
 /* About, short: who makes the signs. The About page has the longer story. */
@@ -76,19 +82,19 @@ section { scroll-margin-top: 72px; }
 .closer .intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
 .closer h2, .made h2 { font-size: clamp(26px, 2.8vw, 34px); margin-top: 10px; }
 .closer .intro p.sub { max-width: 440px; font-size: 15px; color: var(--ink-muted); }
-.shots { margin-top: 26px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr); gap: 12px; }
+.shots { margin-top: 26px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .shots figure { margin: 0; display: flex; flex-direction: column; gap: 6px; }
 .shots .ph { border-radius: 8px; overflow: hidden; border: 1px solid var(--hairline); background: var(--bone-100); }
 .shots img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.shots .a .ph { aspect-ratio: 4 / 3; }
-.shots .b .ph { aspect-ratio: 3 / 4; height: 100%; }
-.shots .c .ph { aspect-ratio: 940 / 788; }
-.points { margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 28px; }
+/* all three shop photos the same shape, cropped to fill */
+.shots .ph { aspect-ratio: 5 / 4; }
+.closer .keyhead { margin-top: 64px; font-size: clamp(26px, 2.8vw, 34px); }
+.points { margin-top: 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 28px; }
 .points li { list-style: none; display: flex; flex-direction: column; gap: 4px; padding-top: 12px; border-top: 2px solid var(--ink); }
 .points ul { margin: 0; padding: 0; display: contents; }
-.points h3 { font-size: 17px; }
-.points p { font-size: 14px; color: var(--ink-muted); }
-@media (max-width: 880px) { .shots { grid-template-columns: 1fr 1fr; } .shots .a { grid-column: span 2; } .points { grid-template-columns: 1fr; } }
+.points h3 { font-size: 19px; }
+.points p { font-size: 16px; line-height: 1.55; color: var(--ink-muted); }
+@media (max-width: 880px) { .shots { grid-template-columns: 1fr 1fr; } .shots .a { grid-column: span 2; } .shots .a .ph { aspect-ratio: 2 / 1; } .points { grid-template-columns: 1fr; } }
 
 @media (max-width: 520px) { .stats dt { font-size: 19px; } }
 
@@ -100,16 +106,23 @@ section { scroll-margin-top: 72px; }
 .closing .mono { color: var(--spark-on-forge); }
 .closing .btn { font-size: 17px; background: var(--link); border-color: var(--link); color: #fff; }
 .closing .btn:hover { background: var(--link-hover); border-color: var(--link-hover); }
+.closing-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.closing .btn.go-btn { background: var(--go); border-color: var(--go-ink); color: var(--go-ink); }
+.closing .btn.go-btn:hover { background: var(--go-hover); border-color: var(--go-ink); }
 
 /* Outside + how it works */
-.facts { padding-block: 56px; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 36px; align-items: center; }
+.facts { padding-block: 64px; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 36px; align-items: center; }
 .facts .rust { margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .facts .rust img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--hairline); }
-.facts h2 { font-size: clamp(26px, 2.8vw, 34px); margin-top: 10px; }
+.facts h2 { font-size: clamp(36px, 4.4vw, 56px); margin-top: 10px; color: #fff; }
 .facts ol { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 14px; }
-.facts li { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 2px solid var(--ink); }
-.facts li h3 { font-size: 17px; }
-.facts li p { font-size: 14px; color: var(--ink-muted); }
+.facts li { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 2px solid var(--go); }
+.facts li h3 { font-size: 21px; color: #fff; }
+.facts li p { font-size: 16px; line-height: 1.55; color: rgba(243,240,234,0.8); }
+/* Built to Last: a dark band of its own, so it reads as the call-out it is */
+.lasts { border-top: 4px solid var(--go); }
+.lasts .mono { color: var(--go); }
+.lasts .facts .rust img { border-color: rgba(243,240,234,0.18); }
 @media (max-width: 880px) { .facts { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -134,6 +147,7 @@ section { scroll-margin-top: 72px; }
         <div class="num"><label for="heroNum">Type your number</label><div class="field"><input id="heroNum" name="n" value="2724" maxlength="6" autocomplete="off" enterkeyhint="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div></div>
         <a class="go" id="heroGo" href="/design?n=2724" data-w="home.button">Design your sign</a>
         <a class="custom" href="/custom" data-w="home.customlink">Something custom?</a>
+        <a class="resume" id="resume" href="/design" hidden><span data-w="home.resume">Pick up your design</span> &rarr;</a>
       </div>
     </form>
   </section>
@@ -152,7 +166,6 @@ section { scroll-margin-top: 72px; }
   <section class="closer wrap" aria-label="What you're paying for">
     <div class="intro">
       <div>
-        <p class="mono" data-w="home.features.label">Key Features</p>
         <h2 data-w="home.features.title">Precision Craftsmanship</h2>
       </div>
       <p class="sub" data-w="home.features.text">Every sign is made to order. Browse photos from the shop below.</p>
@@ -162,6 +175,7 @@ section { scroll-margin-top: 72px; }
       <figure class="b"><div class="ph"><img src="/assets/img/store-number-2.webp" alt="A single stainless number 2 with screw holes, mounted on charred wood" width="1050" height="1400" loading="lazy"></div><figcaption class="mono">6 inch number 2</figcaption></figure>
       <figure class="c"><div class="ph"><img src="/assets/img/store-measurements.webp" alt="A stainless plate reading 2635 with arrows showing 18 inches wide by 6 inches tall" width="940" height="788" loading="lazy"></div><figcaption class="mono">18 in × 6 in plate</figcaption></figure>
     </div>
+    <h2 class="keyhead" data-w="home.features.label">Key Features</h2>
     <div class="points">
       <ul>
         <li><span class="mono">01 · Material</span><h3 data-w="home.feature1.title">304 Stainless Steel</h3><p data-w="home.feature1.text">Solid stainless, about 1/8 inch thick (11 gauge). No coating to wear off.</p></li>
@@ -174,10 +188,10 @@ section { scroll-margin-top: 72px; }
     </div>
   </section>
 
-  <section class="facts wrap">
+  <section class="lasts band-forge" aria-label="Built to last">
+  <div class="facts wrap">
     <figure class="rust">
       <img src="/assets/img/store-rustproof.webp" alt="A carbon steel sign reading 7384 covered in rust beside a clean stainless sign reading 4 BAY. Labels: Carbon steel will rust. Stainless won't." width="940" height="788" loading="lazy">
-      <figcaption class="mono">Carbon steel (top) next to stainless (bottom).</figcaption>
     </figure>
     <div>
       <p class="mono" data-w="home.weather.label">Weather Resistance</p>
@@ -187,6 +201,7 @@ section { scroll-margin-top: 72px; }
         <li><span class="mono">02 · Salt and snow</span><h3 data-w="home.weather2.title">All-Weather</h3><p data-w="home.weather2.text">Snow, salt and sun. No paint or sealant to fail.</p></li>
       </ol>
     </div>
+  </div>
   </section>
 
 
@@ -199,13 +214,13 @@ section { scroll-margin-top: 72px; }
         <h2 data-w="home.custom.title">Custom Work</h2>
         <p data-w="home.custom.text">Property entrances, logos in steel and one-of-a-kind pieces.</p>
       </div>
-      <a class="btn lg" href="/custom">Contact us</a>
+      <div class="closing-btns"><a class="btn lg go-btn" id="footGo" href="/design?n=2724" data-w="home.button">Design your sign</a><a class="btn lg" href="/custom">Contact us</a></div>
     </div>
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261103e"></script>
-<script src="/assets/js/plate.js?v=20261103e"></script>
+<script src="/assets/js/layout.js?v=20261111a"></script>
+<script src="/assets/js/plate.js?v=20261111a"></script>
 <script>
 // The hero plate shows whatever number is typed; the form then opens the design tool with it.
 (function () {
@@ -218,25 +233,44 @@ section { scroll-margin-top: 72px; }
     // Size the plate by its real width so short numbers don't get blown up: a 4-digit plate (~30 in) fills the usual width.
     var full = window.matchMedia('(max-width: 880px)').matches ? 92 : 62;
     box.style.width = Math.max(24, Math.min(96, built.widthIn / 30 * full)) + '%';
-    band.href = document.getElementById('heroGo').href = '/design?n=' + encodeURIComponent(n);
+    band.href = document.getElementById('heroGo').href = document.getElementById('footGo').href = '/design?n=' + encodeURIComponent(n);
   }
+  // A design saved in the design tool: start from its number and offer to pick it up where they left off.
+  try {
+    var saved = JSON.parse(localStorage.getItem('mms-design') || 'null');
+    if (saved && typeof saved.number === 'string' && saved.number) {
+      input.value = saved.number.replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6);
+      document.getElementById('resume').hidden = false;
+    }
+  } catch (e) { /* private browsing or blocked storage */ }
   input.addEventListener('input', draw);
   var hero = document.getElementById('hero');
   // Tapping the number selects it, so typing replaces it; the pulse stops once it has been used.
   input.addEventListener('focus', function () { hero.classList.add('touched'); setTimeout(function () { input.select(); }, 0); });
   // Wall swatches: sharp hero renders, a lighter file on phones.
-  var phone = window.matchMedia('(max-width: 880px)');
-  document.querySelectorAll('[data-wall]').forEach(function (b) {
+  // With a mouse, hovering a swatch previews that wall and leaving the swatches puts the picked one back.
+  // Those walls load in the background once the page is ready, so the preview is instant. Phones keep tap.
+  var phone = window.matchMedia('(max-width: 880px)'), mouse = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var swatches = document.querySelectorAll('[data-wall]'), picked = 'cedar';
+  var wallUrl = function (w) { return '/assets/hero/' + w + (phone.matches ? '-m' : '') + '.webp'; };
+  var show = function (w) { hero.style.backgroundImage = 'url(' + wallUrl(w) + ')'; };
+  swatches.forEach(function (b) {
     b.addEventListener('click', function () {
-      document.querySelectorAll('[data-wall]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
-      hero.style.backgroundImage = 'url(/assets/hero/' + b.dataset.wall + (phone.matches ? '-m' : '') + '.webp)';
+      swatches.forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      picked = b.dataset.wall;
+      show(picked);
       hero.classList.add('touched');
     });
+    b.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') show(b.dataset.wall); });
+  });
+  document.querySelector('.hero .walls').addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') show(picked); });
+  if (mouse.matches) window.addEventListener('load', function () {
+    setTimeout(function () { swatches.forEach(function (b) { new Image().src = wallUrl(b.dataset.wall); }); }, 300);
   });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(draw);
   window.addEventListener('bcf:fonts', draw);
 })();
 </script>
-<script src="/words.js?v=20261103e"></script>
+<script src="/words.js?v=20261111a"></script>
 </body>
 </html>

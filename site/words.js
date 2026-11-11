@@ -34,9 +34,11 @@ window.BCF_WORDS = {
   "home.cue": "Click the sign to design yours",
   "home.customlink": "Something custom?",
   "home.button": "Design your sign",
+  "home.resume": "Pick up your design",
 
   // Design your sign page
   "design.title": "Design Your Sign",
+  "design.startover": "Start over",
 
   // Installed work page
   "work.title": "Installed Work"

@@ -8,6 +8,33 @@
     doors: Math.max(2, +params.get('doors') || 24),
     wall: 'cedar', paint: 'white', photo: null, scale: 1, pos: { x: 0.5, y: 0.45 }
   };
+  // The design is remembered in this browser (not the photo), so customers can look around the site and come back.
+  // A link that sets its own options (?n=, ?for=, ?doors=) wins over what was saved.
+  var KEY = 'mms-design', saved = null;
+  try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { /* private browsing or blocked storage */ }
+  if (saved && typeof saved === 'object') {
+    var ok = function (v, list) { return list.indexOf(v) >= 0; };
+    if (!params.has('n') && typeof saved.number === 'string') state.number = saved.number.replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6);
+    if (!params.has('for') && !params.has('doors')) {
+      if (ok(saved.forwho, ['home', 'property'])) state.forwho = saved.forwho;
+      if (+saved.doors >= 2) state.doors = Math.min(5000, Math.round(+saved.doors));
+    }
+    if (ok(saved.kind, ['plate', 'bar', 'loose'])) state.kind = saved.kind;
+    if (ok(saved.orient, ['h', 'v'])) state.orient = saved.orient;
+    if (ok(saved.size, [4, 6])) state.size = saved.size;
+    if (ok(saved.font, ['jost', 'arimo', 'besley', 'custom'])) state.font = saved.font;
+    if (ok(saved.finish, ['brushed', 'black'])) state.finish = saved.finish;
+    if (typeof saved.wall === 'string') state.wall = saved.wall; // checked against the wall list once it loads
+    if (typeof saved.paint === 'string') state.paint = saved.paint;
+  }
+  function remember() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ number: state.number, forwho: state.forwho, doors: state.doors, kind: state.kind, orient: state.orient,
+        size: state.size, font: state.font, finish: state.finish, wall: state.wall, paint: state.paint }));
+      $('startOver').hidden = false;
+    } catch (e) { /* storage full or blocked: the tool still works, it just won't remember */ }
+  }
+
   var walls = [], presets = {};
   var $ = function (id) { return document.getElementById(id); };
   var stage = $('stage'), sign = $('sign');
@@ -172,6 +199,9 @@
 
   function chips(groupId, key, cast) {
     var group = $(groupId);
+    // start with the current choice pressed (it may come from a saved design)
+    var current = group.querySelector('[data-v="' + state[key] + '"]');
+    if (current) group.querySelectorAll('[data-v]').forEach(function (x) { x.setAttribute('aria-pressed', x === current); });
     group.addEventListener('click', function (e) {
       var b = e.target.closest('[data-v]');
       if (!b) return;
@@ -181,6 +211,7 @@
       if (key === 'wall' || key === 'paint') state.photo = null;
       syncOptions();
       render();
+      remember();
     });
   }
 
@@ -221,13 +252,13 @@
   sign.addEventListener('pointerup', function () { drag = null; render(); });
 
   $('number').value = state.number;
-  $('number').addEventListener('input', function (e) { state.number = e.target.value.replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6); render(); });
+  $('number').addEventListener('input', function (e) { state.number = e.target.value.replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6); render(); remember(); });
   chips('forwho', 'forwho');
   ['home', 'property'].forEach(function (v) { $('forwho').querySelector('[data-v="' + v + '"]').setAttribute('aria-pressed', v === state.forwho); });
   $('doors').value = state.doors;
-  $('doors').addEventListener('input', function (e) { state.doors = Math.max(2, Math.min(5000, parseInt(e.target.value, 10) || 2)); renderPrice(); });
+  $('doors').addEventListener('input', function (e) { state.doors = Math.max(2, Math.min(5000, parseInt(e.target.value, 10) || 2)); renderPrice(); remember(); });
   document.querySelectorAll('.doors-row .step').forEach(function (b) {
-    b.addEventListener('click', function () { state.doors = Math.max(2, Math.min(5000, state.doors + +b.dataset.d)); $('doors').value = state.doors; renderPrice(); });
+    b.addEventListener('click', function () { state.doors = Math.max(2, Math.min(5000, state.doors + +b.dataset.d)); $('doors').value = state.doors; renderPrice(); remember(); });
   });
 
   chips('kind', 'kind');
@@ -272,8 +303,18 @@
     BCFQuote.submit(summary, e.target.querySelector('button[type=submit]'));
   });
 
+  // Start over: forget the saved design and open a fresh tool.
+  $('startOver').hidden = !saved;
+  $('startOver').addEventListener('click', function () {
+    try { localStorage.removeItem(KEY); } catch (e) { /* nothing saved */ }
+    location.href = '/design';
+  });
+
   fetch('/assets/walls/walls.json').then(function (r) { return r.json(); }).then(function (j) {
     walls = j.walls; presets = j.paintPresets;
+    // a saved wall or paint that no longer exists falls back to the defaults
+    if (!walls.some(function (w) { return w.id === state.wall; })) state.wall = 'cedar';
+    if (!presets[state.paint]) state.paint = 'white';
     buildWallPickers();
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(render);
     window.addEventListener('bcf:fonts', render); // a font arrived late: redraw with its tabs and screws
