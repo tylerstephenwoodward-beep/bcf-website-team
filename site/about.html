@@ -4,48 +4,82 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>About · Marks Metal Signs</title>
-<meta name="description" content="About Terran Marks and Marks Metal Signs: stainless steel address signs, made to order in Clear Creek, Indiana.">
+<meta name="description" content="Marks Metal Signs designs, fabricates and installs stainless steel address signs for multi-family housing communities, with a real-time Design Your Sign tool.">
 <link rel="icon" href="/assets/img/mms-icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261111b">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261117a">
 <style>
 /* The About page. */
 .about-page { padding-block: 40px 88px; }
 .intro { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px; align-items: center; }
-.intro h1 { font-size: clamp(32px, 4.2vw, 46px); }
-.intro .lead { margin-top: 14px; font-size: 17px; line-height: 1.6; color: var(--ink-muted); max-width: 540px; }
-.intro .more { margin-top: 18px; font-size: 14px; color: var(--ink-muted); font-style: italic; }
+.intro h1 { font-size: clamp(32px, 4.2vw, 46px); margin-top: 8px; }
+.lead { margin-top: 14px; font-size: 17px; line-height: 1.6; color: var(--ink-muted); max-width: 560px; }
 .intro figure { margin: 0; }
 .intro figure img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; border: 1px solid var(--hairline); }
-.cta { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
-.btn.blue { background: var(--link); border-color: var(--link); color: #fff; }
-.btn.blue:hover { background: var(--link-hover); border-color: var(--link-hover); }
-@media (max-width: 880px) { .intro { grid-template-columns: 1fr; gap: 24px; } .intro figure { order: -1; } }
+
+.points { margin-top: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.points .panel { display: flex; flex-direction: column; gap: 12px; }
+.points .num { font: 500 12px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; color: var(--ink-muted); }
+.points h2 { font-size: 22px; line-height: 1.2; }
+.points p { font-size: 15px; line-height: 1.6; color: var(--ink-muted); }
+.points ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.points li { padding: 7px 12px; border-radius: 999px; background: var(--bone-100); font: 500 13px/1 var(--body); }
+
+.closer { margin-top: 56px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  padding: 28px 32px; border-radius: 12px; background: #141414; border-top: 3px solid var(--yellow, #f2c230); }
+.closer h2 { font-size: clamp(22px, 2.6vw, 30px); color: #fff; }
+
+@media (max-width: 980px) { .points { grid-template-columns: 1fr; } }
+@media (max-width: 880px) { .intro { grid-template-columns: 1fr; gap: 24px; } .intro figure { order: -1; } .closer { padding: 24px; } }
 </style>
 </head>
 <body>
 <header data-nav></header>
 <main class="wrap about-page">
-  <section class="intro" aria-label="About Terran Marks">
+  <section class="intro" aria-label="About us">
     <div>
-      <h1 data-w="about.title">About Terran Marks</h1>
-      <p class="lead" data-w="about.text">Terran Marks is a traditionally trained blacksmith. With a deep knowledge of metalwork and a dedication to customer satisfaction, he is proud to offer stock and custom address signs for homes, communities, and businesses.</p>
-      <p class="lead">15+ years in metalwork. Every sign is made to order in Clear Creek, Indiana.</p>
-      <p class="more">More coming soon.</p>
-      <div class="cta">
-        <a class="btn lg" href="/design">Design your sign</a>
-        <a class="btn lg blue" href="/custom">Contact us</a>
-      </div>
+      <p class="eyebrow">About</p>
+      <h1 data-w="about.title">About Us</h1>
+      <p class="lead" data-w="about.text">At Marks Metal Signs, we work closely with our clients to design, fabricate, and install stainless steel address signs for multi-family housing communities.</p>
+      <p class="lead" data-w="about.text2">The process starts with real-time design using our unique tool.</p>
     </div>
     <figure>
-      <img src="/assets/img/terran.webp" alt="Terran Marks in his blacksmith shop, leaning on a hammer at the anvil" width="640" height="480">
+      <img src="/assets/img/terran.webp" alt="Terran Marks in his shop, leaning on a hammer at the anvil" width="640" height="480">
     </figure>
+  </section>
+
+  <section class="points" aria-label="What we offer">
+    <article class="panel">
+      <span class="num">01</span>
+      <h2>The Design Your Sign Tool</h2>
+      <p>We developed the Design Your Sign tool so you can see what your sign looks like in real time. No more waiting to get a design proof back.</p>
+      <p>Just enter the numbers you’d like, select the type of sign, and your sign will appear. You can then make adjustments to see what the sign will look like with:</p>
+      <ul><li>Different fonts</li><li>Siding types</li><li>Paint colors</li></ul>
+      <p>As you experiment with your signs, your order estimate will update automatically. No more guessing at what the quote will be.</p>
+    </article>
+    <article class="panel">
+      <span class="num">02</span>
+      <h2>Overbuilt, High-Quality Address Signs</h2>
+      <p>We fabricate our signs from 11 gauge 304 stainless steel rather than soft aluminum. The signs won’t rust, corrode, dent, or bend easily.</p>
+      <p>Each address sign comes with screws for mounting and spacers for irregular siding. We provide mounting templates with every order. No need to guess at measurements.</p>
+    </article>
+    <article class="panel">
+      <span class="num">03</span>
+      <h2>Bulk Sign Orders Welcome</h2>
+      <p>We’re happy to design and quote multi-unit properties up to hundreds of units at a time. All of your unit numbers will match: no more random mix of fonts and sizes.</p>
+      <p>At Marks Metal Signs, we believe that no project is too big or too small. We ensure that we deliver high-quality, durable signs on time and within your budget.</p>
+    </article>
+  </section>
+
+  <section class="closer" aria-label="Start designing">
+    <h2>Ready to see your new signs?</h2>
+    <a class="btn lg" href="/design">Start Designing!</a>
   </section>
 </main>
 <footer data-footer></footer>
-<script src="/assets/js/layout.js?v=20261111b"></script>
-<script src="/words.js?v=20261111b"></script>
+<script src="/assets/js/layout.js?v=20261117a"></script>
+<script src="/words.js?v=20261117a"></script>
 </body>
 </html>
