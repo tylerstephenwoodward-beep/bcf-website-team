@@ -391,6 +391,7 @@ export function mount(el, initial) {
   let idle = true, t0 = performance.now(), seq = 0, fitDist = 30;
 
   controls.addEventListener('start', () => { idle = false; });
+  renderer.domElement.addEventListener('pointerdown', () => { idle = false; });
 
   // Zoom with the + and - buttons or a trackpad pinch. A plain scroll wheel scrolls the page, so the
   // viewer never traps someone halfway down the page.
@@ -462,8 +463,8 @@ export function mount(el, initial) {
   renderer.setAnimationLoop((now) => {
     if (!visible) return;
     if (idle && !still && current) {
-      // A slow sway until someone grabs it, so the light runs across the grain.
-      const a = Math.sin((now - t0) / 2600) * (opts.frame === 'wall' ? 0.22 : 0.5);
+      // Pans left and right until someone grabs it, so the light runs across the grain.
+      const a = Math.sin((now - t0) / 1900) * (opts.frame === 'wall' ? 0.22 : 0.5);
       camera.position.set(Math.sin(a) * fitDist, fitDist * 0.12, Math.cos(a) * fitDist);
       camera.lookAt(0, 0, 0);
     }

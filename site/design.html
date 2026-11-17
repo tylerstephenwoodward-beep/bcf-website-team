@@ -202,11 +202,11 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   <div class="tool">
     <section class="viewer" aria-label="Preview and price">
       <div class="preview">
-        <div class="stage" id="stage"><div class="sign" id="sign"></div><span class="hint">Drag to move</span></div>
-        <div class="stage3d" id="stage3d" hidden><span class="loading3d">Loading 3D view</span><span class="hint3d">Drag to turn · + and − to zoom</span></div>
+        <div class="stage" id="stage" hidden><div class="sign" id="sign"></div><span class="hint">Drag to move</span></div>
+        <div class="stage3d" id="stage3d"><span class="loading3d">Loading 3D view</span><span class="hint3d">Drag to turn · + and − to zoom</span></div>
         <div class="mode" id="mode" role="group" aria-label="Preview style">
-          <button type="button" data-mode="flat" aria-pressed="true">Flat</button>
-          <button type="button" data-mode="3d" aria-pressed="false">3D</button>
+          <button type="button" data-mode="flat" aria-pressed="false">Flat</button>
+          <button type="button" data-mode="3d" aria-pressed="true">3D</button>
         </div>
       </div>
       <div class="status">
@@ -379,22 +379,25 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
 <script src="/assets/js/design.js?v=20261117a"></script>
 <script type="module" src="/assets/js/photo.js?v=20261117a"></script>
 <script type="module">
-import { mount } from '/assets/js/viewer3d.js?v=20261117a';
-// Flat or 3D: the same sign on the same wall. The 3D view loads the first time someone picks it.
+import { mount } from '/assets/js/viewer3d.js?v=20261117b';
+// Flat or 3D: the same sign on the same wall. The page opens in 3D, swaying left and right until
+// someone drags or zooms it (viewer3d.js stops the sway on the first touch). Flat is one tap away.
 const flat = document.getElementById('stage'), stage = document.getElementById('stage3d'), mode = document.getElementById('mode');
 let viewer = null, last = window.BCFSign || {};
 document.addEventListener('bcf:sign', (e) => { last = e.detail; if (viewer) viewer.update(last); });
-mode.addEventListener('click', (e) => {
-  const b = e.target.closest('[data-mode]'); if (!b) return;
-  const is3d = b.dataset.mode === '3d';
-  mode.querySelectorAll('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+function show(is3d) {
+  mode.querySelectorAll('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', (x.dataset.mode === '3d') === is3d));
   flat.hidden = is3d;
   stage.hidden = !is3d;
   if (is3d && !viewer) {
     viewer = mount(stage, last);
-    stage.querySelector('.loading3d').remove();
+    stage.querySelector('.loading3d')?.remove();
   }
+}
+mode.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-mode]'); if (b) show(b.dataset.mode === '3d');
 });
+show(true);
 // Dragging on the 3D view turns the sign and never scrolls the page (iPhones ignore touch-action on their own).
 // The zoom buttons still take taps.
 stage.addEventListener('touchmove', (e) => { if (!e.target.closest('button')) e.preventDefault(); }, { passive: false });
