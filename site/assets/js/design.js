@@ -106,15 +106,13 @@
   var motion = null;
   function showDeal(q, property, count, fresh) {
     var deal = property && !q.custom && q.listEach > q.perSign;
-    $('was').hidden = $('off').hidden = !deal;
+    $('was').hidden = !deal;
     $('wasPrice').textContent = money(q.listEach);
-    $('off').textContent = Math.round((1 - q.perSign / q.listEach) * 100) + '% off';
-    $('save').textContent = deal ? 'Property pricing saves you ' + money(BCFPricing.round((q.listEach - q.perSign) * count)) + ' on ' + count + ' doors' : '';
+    $('save').textContent = deal ? 'You save ' + money(BCFPricing.round((q.listEach - q.perSign) * count)) + ' · ' + Math.round((1 - q.perSign / q.listEach) * 100) + '% off every door' : '';
     if (!deal || !fresh || still) return;
     (motion || (motion = import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm').catch(function () { return null; }))).then(function (m) {
       if (!m) return;
       m.animate($('was').querySelector('.strike'), { scaleX: [0, 1] }, { duration: 0.45, delay: 0.15, ease: 'easeOut' });
-      m.animate($('off'), { opacity: [0, 1], scale: [0.6, 1] }, { type: 'spring', stiffness: 420, damping: 18, delay: 0.4 });
       m.animate($('save'), { opacity: [0, 1], y: [6, 0] }, { duration: 0.35, delay: 0.5 });
     });
   }
@@ -131,12 +129,12 @@
     $('tool').dataset.loose = q.tier === 'loose' ? 'yes' : 'no';
     $('tierWhy').textContent = q.custom ? 'Custom fonts are quoted separately.'
       : q.tier === 'loose' ? chars() + ' numbers at ' + money(BCFPricing.looseEach) + ' each.'
-      : property ? 'Each door gets its own set, ' + money(q.perSign) + ' a door.' : '';
+      : '';
     countTo($('price'), q.perSign);
     countTo($('perDoor'), q.perSign);
     countTo($('total'), q.total);
     showDeal(q, property, count, turnedProperty);
-    $('totalLabel').textContent = count + ' doors';
+    $('totalLabel').textContent = count;
     // One-line recap of the design above the quote form.
     $('qsum').textContent = [state.number || '0', STYLE[state.kind], state.orient === 'v' ? 'Vertical' : 'Horizontal',
       state.size + ' inch', fontLabel(), BCFPlate.FINISHES[state.finish].label, q.label,

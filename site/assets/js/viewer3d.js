@@ -464,7 +464,7 @@ export function mount(el, initial) {
     if (!visible) return;
     if (idle && !still && current) {
       // Pans left and right until someone grabs it, so the light runs across the grain.
-      const a = Math.sin((now - t0) / 1900) * (opts.frame === 'wall' ? 0.22 : 0.5);
+      const a = Math.sin((now - t0) / 1100) * (opts.frame === 'wall' ? 0.22 : 0.5);
       camera.position.set(Math.sin(a) * fitDist, fitDist * 0.12, Math.cos(a) * fitDist);
       camera.lookAt(0, 0, 0);
     }

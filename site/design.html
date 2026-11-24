@@ -121,9 +121,6 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
 .tier { padding: 4px 10px; border-radius: 4px; font: 600 13px/18px var(--body); letter-spacing: 0.04em; text-transform: uppercase; }
 .tier.standard { background: var(--bone-100); color: var(--ink); border: 1px solid var(--hairline); }
 .tier.signature { background: var(--forge); color: var(--spark-on-forge); }
-.totals { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 8px; }
-.totals .label { margin-bottom: 2px; }
-.totals strong { display: block; font: 600 30px/1.1 var(--display); }
 .breaks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }
 .breaks li { display: flex; flex-direction: column; gap: 1px; padding: 6px 8px; border-radius: 4px; border: 1px solid var(--hairline); font-size: 12px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
 .breaks strong { font: 600 16px/22px var(--display); color: var(--ink); }
@@ -162,8 +159,8 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   #forwhoSlot { order: 1; }
   .pricebox { order: 2; padding: 14px 16px; gap: 8px; }
   .pricebox .pricefoot, .pricebox .tierline { display: none; }
-  .price strong, .totals strong { font-size: 28px; }
-  .totals { gap: 6px 24px; margin-top: 0; }
+  .price strong { font-size: 28px; }
+  .receipt .sum dd { font-size: 26px; }
   .preview { order: 3; position: sticky; top: var(--nav-shown, 60px); z-index: 5; margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r)); padding: 8px var(--gutter-r) 8px var(--gutter-l); background: var(--bone-50); transition: top 220ms ease, box-shadow 200ms; }
   /* Once it's pinned, a hairline and a soft shadow underneath set it apart from the choices scrolling under it */
   .preview.stuck { border-bottom: 1px solid var(--hairline); box-shadow: 0 10px 18px -12px rgba(20,19,17,0.5); }
@@ -178,6 +175,28 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   .scale-row { order: 5; }
   .tool .controls { order: 6; padding: 16px; }
 }
+/* Property orders: unit number and doors share a row; the price box is a short receipt */
+.num-pair { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; }
+[data-property="no"] .num-pair { grid-template-columns: 1fr; }
+.num-pair .doors-row { margin-top: 0; }
+.num-pair .doors-row .input { width: 72px; padding: 9px 6px; font-size: 20px; }
+.num-pair .doors-row .step { height: 46px; }
+.num-pair .label { white-space: nowrap; }
+[data-property="yes"]:not([data-custom="yes"]) .pricetop { display: none; }
+[data-custom="yes"] .receipt { display: none !important; }
+.receipt { display: flex; align-items: center; gap: 16px 32px; }
+.receipt-math { flex: 1; min-width: 0; }
+.receipt dl { display: grid; gap: 6px; margin: 0 0 8px; }
+.receipt dl div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.receipt dt { color: var(--ink-muted); font-size: 15px; }
+.receipt dd { margin: 0; font: 600 18px/1.2 var(--display); }
+.receipt .was { font-size: 15px; font-weight: 500; }
+.receipt .sum { margin-top: 4px; }
+.receipt .sum dt { color: var(--ink); font-weight: 600; }
+.receipt .sum dd { font-size: 30px; }
+.receipt .save { margin: 0; }
+.receipt .qbtn { flex: none; }
+@media (max-width: 560px) { .receipt { flex-direction: column; align-items: stretch; gap: 12px; } .receipt .qbtn { width: 100%; } }
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/","opentype":"https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.module.js"}}</script>
 </head>
@@ -214,15 +233,21 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
             <div class="tierline"><span class="help" id="tierWhy"></span></div>
             <div class="price-nums">
             <div class="price if-home"><strong id="price">$69.95</strong></div>
-            <div class="totals if-property">
-              <div><span class="label">Per door</span><span class="deal"><span class="was" id="was"><span id="wasPrice">$69.95</span><i class="strike" aria-hidden="true"></i></span><strong id="perDoor">$59.95</strong><span class="off" id="off">14% off</span></span></div>
-              <div><span class="label" id="totalLabel">24 doors</span><strong id="total">$1,198.80</strong></div>
             </div>
-            </div>
-            <p class="save if-property" id="save"></p>
             <p class="if-custom" style="margin-top:8px;max-width:420px">Custom fonts are priced per project. Send your design below and add any font questions in the notes.</p>
           </div>
           <a class="btn" href="#quoteSec">Get my quote</a>
+        </div>
+        <div class="receipt if-property">
+          <div class="receipt-math">
+          <dl>
+            <div><dt>Per door</dt><dd><span class="was" id="was"><span id="wasPrice">$69.95</span><i class="strike" aria-hidden="true"></i></span> <span id="perDoor">$59.95</span></dd></div>
+            <div><dt>Doors</dt><dd>× <span id="totalLabel">24</span></dd></div>
+            <div class="sum"><dt>Total</dt><dd id="total">$1,198.80</dd></div>
+          </dl>
+          <p class="save" id="save"></p>
+          </div>
+          <a class="btn qbtn" href="#quoteSec">Get my quote</a>
         </div>
         <div class="pricefoot">
           <span class="help">A property name, logo or shape? <a class="link" href="/custom">Design something custom!</a></span>
@@ -237,16 +262,20 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
           <button type="button" data-v="home" aria-pressed="true">My home</button>
           <button type="button" data-v="property" aria-pressed="false">A property</button>
         </div>
-        <div class="doors-row if-property">
-          <button class="step" type="button" data-d="-1" aria-label="One fewer door">−</button>
-          <input class="input" id="doors" type="number" min="2" max="5000" value="24" inputmode="numeric" aria-label="How many doors">
-          <button class="step" type="button" data-d="1" aria-label="One more door">+</button>
-          <span class="help" id="doorsNote">doors, same design on each</span>
-        </div>
       </div>
-      <div class="ctl">
-        <label class="label" for="number"><span class="if-home">Your address number</span><span class="if-property">Preview a unit</span></label>
-        <input class="input numin" id="number" maxlength="6" value="2724" autocomplete="off">
+      <div class="num-pair">
+        <div class="ctl">
+          <label class="label" for="number"><span class="if-home">Your address number</span><span class="if-property">Unit number</span></label>
+          <input class="input numin" id="number" maxlength="6" value="2724" autocomplete="off">
+        </div>
+        <div class="ctl if-property">
+          <label class="label" for="doors">Doors</label>
+          <div class="doors-row">
+            <button class="step" type="button" data-d="-1" aria-label="One fewer door">−</button>
+            <input class="input" id="doors" type="number" min="2" max="5000" value="24" inputmode="numeric">
+            <button class="step" type="button" data-d="1" aria-label="One more door">+</button>
+          </div>
+        </div>
       </div>
       <div class="ctl"><span class="label">Style</span>
         <div class="seg" id="kind" role="group" aria-label="Style">
@@ -347,10 +376,10 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
 <script src="/assets/js/plate.js?v=20261117a"></script>
 <script src="/assets/js/pricing.js?v=20261117a"></script>
 <script src="/assets/js/quote.js?v=20261117a"></script>
-<script src="/assets/js/design.js?v=20261117a"></script>
+<script src="/assets/js/design.js?v=20261124d"></script>
 <script type="module" src="/assets/js/photo.js?v=20261124a"></script>
 <script type="module">
-import { mount } from '/assets/js/viewer3d.js?v=20261117b';
+import { mount } from '/assets/js/viewer3d.js?v=20261124a';
 // Flat or 3D: the same sign on the same wall. The page opens in 3D, swaying left and right until
 // someone drags or zooms it (viewer3d.js stops the sway on the first touch). Flat is one tap away.
 const flat = document.getElementById('stage'), stage = document.getElementById('stage3d'), mode = document.getElementById('mode');
