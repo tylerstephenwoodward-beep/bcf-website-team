@@ -43,14 +43,11 @@
 .seg .glyph { font-size: 18px; line-height: 22px; font-weight: 700; }
 .seg .sw { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(20,19,17,0.25); }
 .numin { font: 600 20px/26px var(--display); padding: 8px 12px; }
-.included { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.included li { display: flex; flex-direction: column; gap: 2px; padding-top: 10px; border-top: 2px solid var(--ink); font-size: 13px; color: var(--ink-muted); }
-.included b { font: 600 14px/1.3 var(--display); color: var(--ink); }
 .pricetop { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
 .pricefoot { display: flex; flex-direction: column; gap: 6px; }
 .quotesec { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px; margin-bottom: 72px; scroll-margin-top: 80px; }
 .qsum { margin-top: 14px; padding: 10px 12px; border-radius: 6px; background: var(--bone-100); font: 500 13px/1.5 var(--mono); }
-@media (max-width: 880px) { .quotesec, .included { grid-template-columns: 1fr; } .row2 { grid-template-columns: 1fr; } }
+@media (max-width: 880px) { .quotesec { grid-template-columns: 1fr; } .row2 { grid-template-columns: 1fr; } }
 .stage { position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: 12px; overflow: hidden; background: #6b5b4b center / cover no-repeat; touch-action: none; user-select: none; }
 .stage .sign { position: absolute; transform: translate(-50%, -50%); cursor: grab; }
 .stage .sign:active { cursor: grabbing; }
@@ -89,16 +86,11 @@
 .photo-art { display: block; width: 100%; height: auto; }
 .pdlg-tips { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .pdlg-tips li { position: relative; padding-left: 20px; font-size: 14px; color: var(--ink-muted); }
-.pdlg-tips li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--spark); }
+.pdlg-tips li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--go); box-shadow: 0 0 0 1px var(--go-ink); }
 .pdlg-tips b { color: var(--ink); font-weight: 600; }
-.pdlg-ways { display: flex; flex-direction: column; gap: 14px; padding-top: 14px; border-top: 1px solid var(--hairline); }
-.pdlg-pick input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.pdlg-phone { display: flex; gap: 14px; align-items: center; padding: 12px; border-radius: 10px; background: var(--bone-50); }
-.pdlg-phone b { font: 600 15px/1.3 var(--display); }
-.qr { flex: none; width: 112px; height: 112px; border-radius: 8px; background: var(--bone-0); }
-.qr svg { display: block; width: 100%; height: 100%; }
-.qr-status { margin-top: 4px; color: var(--spark); font-weight: 500; }
-.pdlg-fine { font-size: 12px; }
+.pdlg-pick { width: 100%; }
+#photo { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pdlg-fine { font-size: 13px; text-align: center; }
 .pdlg[data-desktop="yes"] .if-touch, .pdlg[data-desktop="no"] .if-desk { display: none; }
 .scale-row { display: none; gap: 10px; align-items: center; }
 .scale-row.on { display: flex; }
@@ -185,7 +177,6 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   .status { order: 4; }
   .scale-row { order: 5; }
   .tool .controls { order: 6; padding: 16px; }
-  .included { order: 7; }
 }
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/","opentype":"https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.module.js"}}</script>
@@ -196,7 +187,6 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
   <div class="page-head">
     <p class="eyebrow"><span class="if-home">For my home</span><span class="if-property">For a property</span></p>
     <div class="titlerow"><h1 data-w="design.title">Design Your Sign</h1><button class="startover" type="button" id="startOver" hidden data-w="design.startover">Start over</button></div>
-    <p class="lead hide-phone">Type your number, pick a look, and see it on a wall like yours at real size. One sign for your home, or every door on a property, priced as you go.</p>
   </div>
 
   <div class="tool">
@@ -235,15 +225,9 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
           <a class="btn" href="#quoteSec">Get my quote</a>
         </div>
         <div class="pricefoot">
-          <span class="badge ok">Every quote is reviewed and priced before anything is cut</span>
           <span class="help">A property name, logo or shape? <a class="link" href="/custom">Design something custom!</a></span>
         </div>
       </div>
-      <ul class="included">
-        <li><b>Solid steel</b><span>11 gauge 304 stainless, cut clean through</span></li>
-        <li><b>Ready to mount</b><span>Stainless screws included</span></li>
-        <li><b>Precision inspected</b><span>Every design is inspected for quality before it is cut</span></li>
-      </ul>
     </section>
 
     <section class="controls panel" aria-label="Choices">
@@ -308,7 +292,6 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
       </div>
       <div class="ctl upload">
         <button class="btn ghost" type="button" id="photoOpen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>See it on your own wall</button>
-        <p class="help">Snap the spot by your door and we'll put your sign on it.</p>
       </div>
     </section>
   </div>
@@ -323,21 +306,9 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
         <li><b>Fill the frame</b> with the wall where the sign goes</li>
         <li><b>Face it straight on,</b> in daylight</li>
       </ul>
-      <div class="pdlg-ways">
-        <div class="pdlg-pick">
-          <label class="btn lg" for="photo"><span class="if-desk">Choose a photo</span><span class="if-touch">Take or choose a photo</span></label>
-          <input type="file" id="photo" accept="image/*">
-        </div>
-        <div class="pdlg-phone if-desk">
-          <div class="qr" id="qr" aria-label="QR code that opens the camera page on your phone"></div>
-          <div>
-            <b>On a computer? Use your phone.</b>
-            <p class="help">Scan this, take the photo, and it shows up here.</p>
-            <p class="help qr-status" id="qrStatus" aria-live="polite"></p>
-          </div>
-        </div>
-      </div>
-      <p class="help pdlg-fine">Your photo only draws this preview. We never store it.</p>
+      <label class="btn lg pdlg-pick" for="photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span class="if-desk">Choose a photo</span><span class="if-touch">Take or choose a photo</span></label>
+      <input type="file" id="photo" accept="image/*">
+      <p class="help pdlg-fine"><span class="if-desk">On a computer? Text or AirDrop the photo to yourself first. </span>Your photo stays on your device. It only draws the preview.</p>
     </div>
   </dialog>
 
@@ -377,7 +348,7 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
 <script src="/assets/js/pricing.js?v=20261117a"></script>
 <script src="/assets/js/quote.js?v=20261117a"></script>
 <script src="/assets/js/design.js?v=20261117a"></script>
-<script type="module" src="/assets/js/photo.js?v=20261117a"></script>
+<script type="module" src="/assets/js/photo.js?v=20261124a"></script>
 <script type="module">
 import { mount } from '/assets/js/viewer3d.js?v=20261117b';
 // Flat or 3D: the same sign on the same wall. The page opens in 3D, swaying left and right until

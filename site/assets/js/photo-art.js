@@ -1,12 +1,12 @@
-// "How to take the photo" picture: a phone's orange flash lighting just the spot by the door where the sign goes.
-// Shared by the design page pop-up (photo.js) and the phone page (snap.html). Motion (motion.dev, the vanilla
+// "How to take the photo" picture: a phone's yellow flash lighting just the spot by the door where the sign goes.
+// Shown in the design page pop-up (photo.js). Motion (motion.dev, the vanilla
 // version of Framer Motion) pulses the light; without it, or with reduced motion, the picture just sits still.
 export const art = `
 <svg class="photo-art" viewBox="0 0 480 270" role="img" aria-label="A phone held a few steps back, its light framing the wall beside the front door">
   <defs>
     <linearGradient id="pa-beam" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#f59a4a" stop-opacity="0.75"/>
-      <stop offset="1" stop-color="#f59a4a" stop-opacity="0.18"/>
+      <stop offset="0" stop-color="#ffd23f" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#ffd23f" stop-opacity="0.18"/>
     </linearGradient>
     <clipPath id="pa-wall"><rect width="480" height="270" rx="14"/></clipPath>
   </defs>
@@ -17,19 +17,19 @@ export const art = `
     <rect x="380" y="40" width="78" height="240" fill="#24221f"/>
     <circle cx="392" cy="162" r="4" fill="#85847f"/>
     <g class="pa-spot">
-      <rect x="236" y="78" width="116" height="76" fill="#f59a4a" fill-opacity="0.32"/>
+      <rect x="236" y="78" width="116" height="76" fill="#ffd23f" fill-opacity="0.32"/>
       <rect x="262" y="99" width="64" height="34" rx="2" fill="#c9ccca" stroke="#85847f"/>
       <text x="294" y="124" text-anchor="middle" font-family="Jost, Futura, sans-serif" font-weight="600" font-size="21" fill="#24221f">2724</text>
     </g>
     <polygon class="pa-beam" points="100,150 236,78 352,78 352,154 236,154" fill="url(#pa-beam)"/>
-    <g fill="none" stroke="#b3470f" stroke-width="4" stroke-linecap="round">
+    <g fill="none" stroke="#141311" stroke-width="4" stroke-linecap="round">
       <path d="M236 94V78h16M336 78h16v16M352 138v16h-16M252 154h-16v-16"/>
     </g>
     <g transform="translate(58 146) rotate(-14)">
       <rect width="64" height="118" rx="11" fill="#141311"/>
       <rect x="5" y="10" width="54" height="98" rx="5" fill="#2f2c28"/>
-      <path d="M17 40v-8h8M39 32h8v8M47 64v8h-8M25 72h-8v-8" fill="none" stroke="#f59a4a" stroke-width="2.5" stroke-linecap="round"/>
-      <circle class="pa-flash" cx="32" cy="5" r="3" fill="#f59a4a"/>
+      <path d="M17 40v-8h8M39 32h8v8M47 64v8h-8M25 72h-8v-8" fill="none" stroke="#ffd23f" stroke-width="2.5" stroke-linecap="round"/>
+      <circle class="pa-flash" cx="32" cy="5" r="3" fill="#ffd23f"/>
     </g>
   </g>
 </svg>`;
