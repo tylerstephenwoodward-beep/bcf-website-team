@@ -28,6 +28,16 @@ Everything is in the `site` folder. Each page is one file:
 - `walls/`: the wall backgrounds in the design tool
 - `fonts/`: the fonts used to cut the numbers
 
+## Quote requests and the client list
+
+When a customer clicks **Submit**, the request is emailed to the shop with a PDF quote, the customer gets a copy, and a row is added to a Google Sheet client list. This runs on a small Google script in the shop's own Google account, not on the website.
+
+- **Setup guide (about 10 minutes, once):** `crm/README.md`
+- **The script to paste into the Google Sheet:** `crm/Code.gs`
+- **Where its link goes on the website:** `site/settings.js` (the `crmUrl` line, ends in `/exec`)
+
+Until the link is in `settings.js`, quote requests show an "Email my request" button instead.
+
 ## Common changes
 
 - **Wording:** most headings and short lines are in `site/words.js`. Change the text between the quotes.
