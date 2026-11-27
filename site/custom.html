@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261117a">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261124a">
 <style>
 /* An open inquiry: the vision, any questions, and how to reach you. */
 /* One column until there's room for two; the example panel only stays pinned when it sits beside the form. */
@@ -63,6 +63,7 @@
       </div>
 
       <p class="help" id="err" role="alert" style="color:var(--fail)"></p>
+      <input type="text" id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button class="btn lg" type="submit" style="align-self:flex-start">Submit</button>
       <p class="help">We only use this to reply about your sign. We never sell or share it. <a href="/privacy">Privacy</a></p>
     </form>
@@ -70,7 +71,8 @@
 </main>
 <footer data-footer></footer>
 <script src="/assets/js/layout.js?v=20261117a"></script>
-<script src="/assets/js/quote.js?v=20261117a"></script>
+<script src="/settings.js"></script>
+<script src="/assets/js/quote.js?v=20261124e"></script>
 <script src="/assets/js/plate.js?v=20261117a"></script>
 <script>
 (function () {

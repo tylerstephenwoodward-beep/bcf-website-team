@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&family=Besley:wght@700&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261117a">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261124a">
 <style>
 /* Title with a small "Start over" link that forgets the saved design */
 .titlerow { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
@@ -366,6 +366,7 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
       </div>
       <div class="field"><label class="label" for="qnotes">Anything we should know <span style="text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></label><textarea class="input" id="qnotes" rows="3" placeholder="Mounting on brick next to the front door"></textarea></div>
       <p class="help" id="qerr" role="alert" style="color:var(--fail)"></p>
+      <input type="text" id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button class="btn lg" type="submit">Send my quote request</button>
       <p class="help">We only use this to reply about your sign. We never sell or share it. <a href="/privacy">Privacy</a></p>
     </form>
@@ -375,8 +376,9 @@ form.quote { display: flex; flex-direction: column; gap: 14px; }
 <script src="/assets/js/layout.js?v=20261117a"></script>
 <script src="/assets/js/plate.js?v=20261117a"></script>
 <script src="/assets/js/pricing.js?v=20261117a"></script>
-<script src="/assets/js/quote.js?v=20261117a"></script>
-<script src="/assets/js/design.js?v=20261124d"></script>
+<script src="/settings.js"></script>
+<script src="/assets/js/quote.js?v=20261124e"></script>
+<script src="/assets/js/design.js?v=20261124e"></script>
 <script type="module" src="/assets/js/photo.js?v=20261124a"></script>
 <script type="module">
 import { mount } from '/assets/js/viewer3d.js?v=20261124a';

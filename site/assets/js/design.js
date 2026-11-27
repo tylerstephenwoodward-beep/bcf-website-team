@@ -5,7 +5,7 @@
   var state = {
     number: (params.get('n') || '2724').replace(/[^0-9a-zA-Z -]/g, '').slice(0, 6), kind: 'plate', orient: 'h', size: 6, font: 'jost', finish: 'brushed',
     forwho: params.get('for') === 'property' || +params.get('doors') > 1 ? 'property' : 'home',
-    doors: Math.max(2, +params.get('doors') || 24),
+    doors: Math.min(5000, Math.max(2, Math.round(+params.get('doors')) || 24)),
     wall: 'cedar', paint: 'white', photo: null, scale: 1, pos: { x: 0.5, y: 0.45 }
   };
   // The design is remembered in this browser (not the photo), so customers can look around the site and come back.

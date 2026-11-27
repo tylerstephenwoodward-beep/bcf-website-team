@@ -123,3 +123,10 @@ html.nav-up .nav { transform: translateY(-100%); }
 .stage3d .zoom3d button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(243,240,234,0.35); background: rgba(20,19,17,0.55); color: #f3f0ea; font: 500 20px/1 var(--body); cursor: pointer; }
 .stage3d .zoom3d button:hover { background: rgba(20,19,17,0.8); }
 .stage3d .loading3d { position: absolute; inset: 0; display: grid; place-items: center; color: rgba(243,240,234,0.6); font: 500 13px/1 var(--body); pointer-events: none; }
+
+/* Quote and custom requests: shown in place of the form once it's sent (quote.js) */
+.sent-ok { display: flex; flex-direction: column; gap: 10px; padding: 22px 24px; border-radius: 10px; border: 1.5px solid var(--ok); background: var(--ok-100); outline: none; }
+.sent-ok h3 { font: 600 22px/1.2 var(--display); color: var(--ok); }
+.sent-ok h3::before { content: "\2713\00a0"; }
+.sent-ok p { font-size: 15px; color: var(--ink); max-width: 560px; }
+.sent-ok .link { align-self: flex-start; }
