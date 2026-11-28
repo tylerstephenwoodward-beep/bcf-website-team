@@ -62,16 +62,20 @@ The script is what connects the website to your sheet. It lives inside **your** 
 
 ## Step 6: Put the link in the website
 
-1. Open **`site/settings.js`** in the website files. It's a short file.
+Do this after you've put the latest website files on WordPress.
+
+1. Open **`site/settings.js`** in your website files. It's a short file.
 2. Paste the link between the quotes on the `crmUrl` line, like this:
 
    ```js
    crmUrl: 'https://script.google.com/macros/s/AKfy...long...code/exec'
    ```
 
-3. Save, and update the website the way you normally do. On WordPress, that means re-uploading `settings.js`, or the whole site folder.
+3. Save. On WordPress, that means saving or re-uploading `settings.js`.
 
-**Not comfortable editing the file?** Just email the link to Tyler. He'll put it in, and you pull the updated files.
+**If you ever re-download the website files from the repo,** paste the link back in afterward. The repo's copy of `settings.js` is left blank on purpose, so a fresh download replaces your link with an empty one. Until it's back, quote requests show an "Email my request" button instead.
+
+The link isn't a password: it can only send new requests in, never read your sheet.
 
 ## Step 7: Check it
 
